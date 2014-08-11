@@ -38,6 +38,13 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# need to specify rspec-rails b/c we're using rails
+gem 'rspec-rails'
+
+gem 'pry-byebug'
+
+
+
 
 
 

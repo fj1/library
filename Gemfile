@@ -43,7 +43,8 @@ gem 'rspec-rails'
 
 gem 'pry-byebug'
 
-
+# pretty-fies table format in the rails console
+gem 'hirb'
 
 
 

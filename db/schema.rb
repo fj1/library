@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811205340) do
+ActiveRecord::Schema.define(version: 20140811231430) do
 
   create_table "actors", force: true do |t|
     t.string   "last_name"
@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(version: 20140811205340) do
 
   create_table "books", force: true do |t|
     t.string   "title"
-    t.string   "author_last"
-    t.string   "author_first"
     t.string   "category"
     t.string   "comment"
     t.boolean  "on_loan"
@@ -47,9 +45,6 @@ ActiveRecord::Schema.define(version: 20140811205340) do
 
   create_table "cds", force: true do |t|
     t.string   "title"
-    t.string   "musician_last"
-    t.string   "musician_first"
-    t.string   "ensemble"
     t.string   "category"
     t.string   "comment"
     t.boolean  "on_loan"
@@ -65,8 +60,6 @@ ActiveRecord::Schema.define(version: 20140811205340) do
 
   create_table "dvds", force: true do |t|
     t.string   "title"
-    t.string   "actor_last"
-    t.string   "actor_first"
     t.string   "category"
     t.string   "comment"
     t.boolean  "on_loan"

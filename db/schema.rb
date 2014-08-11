@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140811032046) do
+ActiveRecord::Schema.define(version: 20140811203828) do
+
+  create_table "actors", force: true do |t|
+    t.string   "last_name"
+    t.string   "first_name"
+    t.integer  "dvd_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authors", force: true do |t|
+    t.string   "last_name"
+    t.string   "first_name"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "books", force: true do |t|
     t.string   "title"
@@ -25,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140811032046) do
     t.boolean  "is_owned"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "cds", force: true do |t|
@@ -40,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140811032046) do
     t.boolean  "is_owned"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "dvds", force: true do |t|
@@ -52,6 +70,22 @@ ActiveRecord::Schema.define(version: 20140811032046) do
     t.boolean  "viewed"
     t.boolean  "is_digital"
     t.boolean  "is_owned"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "ensembles", force: true do |t|
+    t.string   "name"
+    t.integer  "cd_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "musicians", force: true do |t|
+    t.string   "last_name"
+    t.string   "first_name"
+    t.integer  "cd_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140811032046) do
     t.boolean  "is_owned"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BooksController, :type => :controller do
+RSpec.describe DvdsController, :type => :controller do
 
   describe "GET index" do
     it "returns http success" do

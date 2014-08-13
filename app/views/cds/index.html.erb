@@ -1,16 +1,23 @@
 <h1>Cds#index</h1>
 <p>Find me in app/views/cds/index.html.erb</p>
 
-
-<p> hmmmm how do i access musician and ensemble? </p>
-
-<% @cds.each do |x| %> 
-  <p> <%= x.title %> </p>
-  <p> <%= x.comment %> </p>
-  <p> <%= x.category %> </p>
-  <p> Is this loaned out? <%= x.on_loan %> </p>
-  <p> Have I listened to this? <%= x.listened %> </p>
-  <p> Is this digital? <%= x.is_digital %> </p>
-  <p> Do I own this? <%= x.is_owned %> </p>
+<% @cds.each do |cd| %> 
+  <h3> <%= cd.title %> </h3>
+  <!-- iterate thru cd.musicians to get all the musicians -->
+  <% cd.musicians.each do |m| %>
+    <p style="color: red"> <%= "#{m.first_name} #{m.last_name}" %> </p>
+  <% end %>  
+  <!--  -->   
+  <!-- iterate thru cd.ensembles to get all the musicians -->
+  <% cd.ensembles.each do |e| %>
+    <p style="color: blue"> <%= "#{e.name}" %> </p>
+  <% end %>  
+  <!--  --> 
+  <p> <%= cd.comment %> </p>
+  <p> <%= cd.category %> </p>
+  <p> Is this loaned out? <%= cd.on_loan %> </p>
+  <p> Have I listened to this? <%= cd.listened %> </p>
+  <p> Is this digital? <%= cd.is_digital %> </p>
+  <p> Do I own this? <%= cd.is_owned %> </p>
 <% end %>
 

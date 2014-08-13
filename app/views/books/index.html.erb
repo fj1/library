@@ -1,13 +1,51 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 
-<p>hmmmmmmmmmm how to add authors? </p>
-
-<% @books.each do |x| %>
-  <p> <%= x.title %> </p>
-  <p> <%= x.category %> </p>
-  <p> Is this on loan? <%= x.on_loan %> </p>
-  <p> Have I watched this? <%= x.read %> </p>
-  <p> Is this digital? <%= x.is_digital %> </p>
-  <p> Do I own this? <%= x.is_owned %> </p>
+<% @books.each do |book| %>
+  <p> <%= book.title %> </p>
+  <!-- iterate thru book.authors -->
+  <% book.authors.each do |a| %>
+    <p style="color: green"> <%= "#{a.first_name} #{a.last_name}" %> </p>
+  <% end %>
+  <!--  -->
+  <p> <%= book.category %> </p>
+  <p> Is this on loan? <%= book.on_loan %> </p>
+  <p> Have I read this? <%= book.read %> </p>
+  <p> Is this digital? <%= book.is_digital %> </p>
+  <p> Do I own this? <%= book.is_owned %> </p>
 <% end %>
+
+<!-- ********** FORM ********** -->
+<form>
+  <label for="title">Book Title:</label>
+  <input id="title" type="text">
+
+  <label for="author">Author:</label>
+  <input id="author" type="author">
+
+  <label for="category">Category:</label>
+  <input id="author" type="category">
+
+  <p>Is this book currently on loan?<p>
+  <input class="loan-radio" type="radio" value="no">No
+  <input class="loan-radio" type="radio" value="yes">Yes  
+
+  <p>Have I read this book already?</p>
+  <input class="loan-radio" type="radio" value="no">No
+  <input class="loan-radio" type="radio" value="yes">Yes  
+
+  <p>Is this book a digital copy?</p>
+  <input class="loan-radio" type="radio" value="no">No
+  <input class="loan-radio" type="radio" value="yes">Yes
+
+  <p>Do I already own a copy of this book?</p>
+  <input class="loan-radio" type="radio" value="no">No
+  <input class="loan-radio" type="radio" value="yes">Yes
+
+</form>
+
+
+
+
+
+

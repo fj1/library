@@ -1,13 +1,16 @@
 <h1>Dvds#index</h1>
 <p>Find me in app/views/dvds/index.html.erb</p>
 
-<p>hmmmmmmmmm how do i add all the actors?</p>
-
-<% @dvds.each do |x| %>
-  <p> <%= x.title %> </p>
-  <p> <%= x.category %> </p>
-  <p> Is this on loan? <%= x.on_loan %> </p>
-  <p> Have I watched this? <%= x.viewed %> </p>
-  <p> Is this digital? <%= x.is_digital %> </p>
-  <p> Do I own this? <%= x.is_owned %> </p>
+<% @dvds.each do |dvd| %>
+  <p> <%= dvd.title %> </p>
+    <!-- iterate thru book.authors -->
+  <% dvd.actors.each do |a| %>
+    <p style="color: red"> <%= "#{a.first_name} #{a.last_name}" %> </p>
+  <% end %>
+  <!--  -->
+  <p> <%= dvd.category %> </p>
+  <p> Is this on loan? <%= dvd.on_loan %> </p>
+  <p> Have I watched this? <%= dvd.viewed %> </p>
+  <p> Is this digital? <%= dvd.is_digital %> </p>
+  <p> Do I own this? <%= dvd.is_owned %> </p>
 <% end %>

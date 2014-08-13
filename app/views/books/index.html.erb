@@ -1,7 +1,13 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 
+<p>hmmmmmmmmmm how to add authors? </p>
 
 <% @books.each do |x| %>
   <p> <%= x.title %> </p>
+  <p> <%= x.category %> </p>
+  <p> Is this on loan? <%= x.on_loan %> </p>
+  <p> Have I watched this? <%= x.read %> </p>
+  <p> Is this digital? <%= x.is_digital %> </p>
+  <p> Do I own this? <%= x.is_owned %> </p>
 <% end %>

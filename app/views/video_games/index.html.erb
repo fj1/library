@@ -3,4 +3,12 @@
 
 <% @vgs.each do |x| %>
   <p> <%= x.title %> </p>
+  <p> <%= x.console %> </p>
+  <p> <%= x.category %> </p>
+  <p> <%= x.comment %> </p>
+  <p> Is this on loan? <%= x.on_loan %> </p>
+  <p> Have I played this? <%= x.played %> </p>
+  <p> Is this digital? <%= x.is_digital %> </p>
+  <p> Do I own this? <%= x.is_owned %> </p>
+
 <% end %>

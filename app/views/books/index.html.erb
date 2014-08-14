@@ -5,6 +5,37 @@
 <!-- then use html/jquery for form -->
 <!-- then ajax request for data from @books -->
 
+<table id="books-table" class="display">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Category</th>
+      <th>Comments</th>
+      <th>Loaned out?</th>
+      <th>Already read?</th>
+      <th>Digital?</th>
+      <th>Owned?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @books.each do |book| %>
+      <tr>    
+        <td> <%= "#{book.title}" %> </td>
+        <td> <% book.authors.each do |a| %> 
+          <%= "#{a.first_name} #{a.last_name}" %>
+          <% end %>
+        </td>
+        <td> <%= "#{book.category}" %> </td>
+        <td> <%= "#{book.comment}" %> </td>
+        <td> <%= "#{book.on_loan}" %> </td>
+        <td> <%= "#{book.read}" %> </td>
+        <td> <%= "#{book.is_digital}" %> </td>
+        <td> <%= "#{book.is_owned}" %> </td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
 
 <!-- ******************************** -->
 
@@ -72,7 +103,11 @@
   <%= submit_tag("Submit") %>
 <% end %>
 
-
+<script>
+  $(document).ready( function () {
+    $('#books-table').DataTable();
+  });
+</script>
 
 
 

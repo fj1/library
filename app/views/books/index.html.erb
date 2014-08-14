@@ -1,48 +1,78 @@
 <h1>Books#index</h1>
 <p>Find me in app/views/books/index.html.erb</p>
 
+<!-- if rendering json @books -->
+<!-- then use html/jquery for form -->
+<!-- then ajax request for data from @books -->
+
+
+<!-- ******************************** -->
+
 <% @books.each do |book| %>
-  <p> <%= book.title %> </p>
+  <p style="color: red"> <%= book.title %> </p>
   <!-- iterate thru book.authors -->
   <% book.authors.each do |a| %>
-    <p style="color: green"> <%= "#{a.first_name} #{a.last_name}" %> </p>
+    <p> <%= "#{a.first_name} #{a.last_name}" %> </p>
   <% end %>
   <!--  -->
-  <p> <%= book.category %> </p>
-  <p> Is this on loan? <%= book.on_loan %> </p>
-  <p> Have I read this? <%= book.read %> </p>
-  <p> Is this digital? <%= book.is_digital %> </p>
-  <p> Do I own this? <%= book.is_owned %> </p>
+  <p> Category: <%= book.category %> Comment: <%= book.comment %> </p>
+  <p> Is this on loan? <%= book.on_loan %> 
+      Have I read this? <%= book.read %> 
+      Is this digital? <%= book.is_digital %> 
+      Do I own this? <%= book.is_owned %> </p>
 <% end %>
 
-<!-- ********** FORM ********** -->
-<form>
-  <label for="title">Book Title:</label>
-  <input id="title" type="text">
+<!-- ********** RAILS FORM ********** -->
+<h2 style="color: red">****** LOOK AT ME, I'M A RAILS-Y FORM ******</h2>
+<h2 style="color: red">****** I'M SO FANCY ******</h2>
 
-  <label for="author">Author:</label>
-  <input id="author" type="author">
 
-  <label for="category">Category:</label>
-  <input id="author" type="category">
+<%= form_tag("/books", method: "post") do %>
+  <%= label_tag('book[title]', "Title:") %>
+  <%= text_field_tag('book[title]') %> <br>
 
-  <p>Is this book currently on loan?<p>
-  <input class="loan-radio" type="radio" value="no">No
-  <input class="loan-radio" type="radio" value="yes">Yes  
+  <%= label_tag('book[first_name]', "Author's first name:") %>
+  <%= text_field_tag('book[first_name]') %> <br>
 
-  <p>Have I read this book already?</p>
-  <input class="loan-radio" type="radio" value="no">No
-  <input class="loan-radio" type="radio" value="yes">Yes  
+  <%= label_tag('book[last_name]', "Author's last name:") %>
+  <%= text_field_tag('book[last_name]') %> <br>
 
-  <p>Is this book a digital copy?</p>
-  <input class="loan-radio" type="radio" value="no">No
-  <input class="loan-radio" type="radio" value="yes">Yes
+  <%= label_tag('book[category]', "Category:") %>
+  <%= text_field_tag('book[category]') %> <br>
 
-  <p>Do I already own a copy of this book?</p>
-  <input class="loan-radio" type="radio" value="no">No
-  <input class="loan-radio" type="radio" value="yes">Yes
+  <%= label_tag('book[comment]', "Comment:") %>
+  <%= text_field_tag('book[comment]') %> <br>
 
-</form>
+  Is this book currently on loan?
+  <%= radio_button_tag('book[on_loan]', true) %>
+  <%= label_tag(:on_loan_true, "Yes") %>
+  <%= radio_button_tag('book[on_loan]', false, true) %>
+  <%= label_tag(:on_loan_false, "No") %> <br>
+
+  Have I read this book already?
+  <%= radio_button_tag('book[read]', true) %>
+  <%= label_tag(:read_true, "Yes") %>
+  <%= radio_button_tag('book[read]', false, true) %>
+  <%= label_tag(:read_false, "No") %> <br>
+
+  Is this book a digital copy?
+  <%= radio_button_tag('book[is_digital]', true) %>
+  <%= label_tag(:is_digital_true, "Yes") %>
+  <%= radio_button_tag('book[is_digital]', false, true) %>
+  <%= label_tag(:is_digital_false, "No") %> <br>
+
+  Do I already own a copy of this book?
+  <%= radio_button_tag('book[is_owned]', true) %>
+  <%= label_tag(:is_owned_true, "Yes") %>
+  <%= radio_button_tag('book[is_owned]', false, true) %>
+  <%= label_tag(:is_owned_false, "No") %> <br>
+
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+  <%= submit_tag("Submit") %>
+<% end %>
+
+
 
 
 

@@ -17,14 +17,20 @@ class CdsController < ApplicationController
 
   def create
     cd = Cd.new(cd_params)
-    musician = Musician.new(musician_params)
-    ensemble = Ensemble.new(ensemble_params)
+    # logic to check for .empty on musician
+    if !cd.musicians.empty?
+      musician = Musician.new(musician_params)
+      musician.save!
+      CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
+    end
+    # logic to check for .empty on ensemble
+    if !cd.musicians.empty?
+      ensemble = Ensemble.new(ensemble_params)
+      ensemble.save!
+      CdEnsemble.create!( {cd_id: cd.id, ensemble_id: ensemble.id} )
+    end
     cd.save!
-    musician.save!
-    ensemble.save!
     redirect_to root_path
-    CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
-    CdEnsemble.create!( {cd_id: cd.id, ensemble_id: ensemble.id} )
   end
 
   def edit

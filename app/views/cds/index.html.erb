@@ -16,15 +16,26 @@
     <% @cds.each do |cd| %>
       <tr>
         <td> <%= "#{cd.title}" %> </td>
-        <td> <% cd.musicians.each do |m| %>
-          <%= "#{m.first_name} #{m.last_name}" %> <br>
+        <!-- cd.musicians if/else -->
+        <% if !cd.musicians.present? %>
+          <td></td>
+        <% else %>
+          <td> <% cd.musicians.each do |m| %>
+            <%= "#{m.first_name} #{m.last_name}" %> <br>
+          <% end %>
+          </td>
+        <% end %>  
+        <!-- cd.ensembles if/else -->
+        <% if !cd.ensembles.present? %>
+          <td></td>
+        <% else %>  
+          <td> <% cd.ensembles.each do |e| %>
+            <%= "#{e.name}" %>
+          <% end %>
+          </td>
         <% end %>
-        </td>
-        <td> <% cd.ensembles.each do |e| %>
-          <%= "#{e.name}" %>
-        <% end %>
-        </td>
         <td> <%= "#{cd.category}" %> </td>
+        <td> <%= "#{cd.comment}" %> </td>
         <td> <%= "#{cd.on_loan}" %> </td>
         <td> <%= "#{cd.listened}" %> </td>
         <td> <%= "#{cd.is_digital}" %> </td>

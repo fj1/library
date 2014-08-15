@@ -20,10 +20,26 @@
         <td> <%= "#{v.console}" %> </td>
         <td> <%= "#{v.category}" %> </td>
         <td> <%= "#{v.comment}" %> </td>
-        <td> <%= "#{v.on_loan}" %> </td>
-        <td> <%= "#{v.played}" %> </td>
-        <td> <%= "#{v.is_digital}" %> </td>
-        <td> <%= "#{v.is_owned}" %> </td>
+        <!-- on_loan if/else -->
+        <td> <% if v.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
+        <!-- played if/else -->  
+        <td> <% if v.played == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
+        <!-- is_digital if/else -->
+        <td> <% if v.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
+        <!-- is_owned if/else -->
+        <td> <% if v.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
       </tr>
     <% end %> 
   </tbody>

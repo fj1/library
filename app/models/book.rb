@@ -13,9 +13,9 @@ class Book < ActiveRecord::Base
   
   # gotta validate differently for boolean
   # because false==blank and will fail presence:true
-  validates_inclusion_of :on_loan,:in => [true, false]
-  validates_inclusion_of :read,:in => [true, false]
-  validates_inclusion_of :is_owned,:in => [true, false]
-  validates_inclusion_of :is_digital,:in => [true, false]
+  validates_inclusion_of :on_loan, :in => [true, false]
+  validates_inclusion_of :read, :in => [true, false]
+  validates_inclusion_of :is_owned, :in => [true, false]
+  validates_inclusion_of :is_digital, :in => [true, false]
 
 end

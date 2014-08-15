@@ -1,23 +1,93 @@
-<h1>Cds#index</h1>
-<p>Find me in app/views/cds/index.html.erb</p>
+<table id="cds-table" class="display">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Musician(s)</th>
+      <th>Band/Ensemble</th>
+      <th>Category</th>
+      <th>Loaned out?</th>
+      <th>Previously listened?</th>
+      <th>Digital?</th>
+      <th>Owned?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cds.each do |cd| %>
+      <tr>
+        <td> <%= "#{cd.title}" %> </td>
+        <td> <% cd.musicians.each do |m| %>
+          <%= "#{m.first_name} #{m.last_name}" %> <br>
+        <% end %>
+        </td>
+        <td> <% cd.ensembles.each do |e| %>
+          <%= "#{e.name}" %>
+        <% end %>
+        </td>
+        <td> <%= "#{cd.category}" %> </td>
+        <td> <%= "#{cd.on_loan}" %> </td>
+        <td> <%= "#{cd.listened}" %> </td>
+        <td> <%= "#{cd.is_digital}" %> </td>
+        <td> <%= "#{cd.is_owned}" %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<% @cds.each do |cd| %> 
-  <h3> <%= cd.title %> </h3>
-  <!-- iterate thru cd.musicians to get all the musicians -->
-  <% cd.musicians.each do |m| %>
-    <p style="color: red"> <%= "#{m.first_name} #{m.last_name}" %> </p>
-  <% end %>  
-  <!--  -->   
-  <!-- iterate thru cd.ensembles to get all the musicians -->
-  <% cd.ensembles.each do |e| %>
-    <p style="color: blue"> <%= "#{e.name}" %> </p>
-  <% end %>  
-  <!--  --> 
-  <p> <%= cd.comment %> </p>
-  <p> <%= cd.category %> </p>
-  <p> Is this loaned out? <%= cd.on_loan %> </p>
-  <p> Have I listened to this? <%= cd.listened %> </p>
-  <p> Is this digital? <%= cd.is_digital %> </p>
-  <p> Do I own this? <%= cd.is_owned %> </p>
+
+<!-- RAILS FORM -->
+
+<%= form_tag("/cds", method: "post") do %>
+  <%= label_tag('cd[title]', "Title:") %>
+  <%= text_field_tag('cd[title]') %> <br>
+
+  <%= label_tag('cd[first_name]', "Musician's first name:") %>
+  <%= text_field_tag('cd[first_name]') %> <br>
+
+  <%= label_tag('cd[last_name]', "Musician's last name:") %>
+  <%= text_field_tag('cd[last_name]') %> <br>
+
+  <%= label_tag('cd[ensemble]', "Band's name:") %>
+  <%= text_field_tag('cd[name]') %> <br>
+
+  <%= label_tag('cd[category]', "Musical category:") %>
+  <%= text_field_tag('cd[category]') %> <br>
+
+  <%= label_tag('cd[comment]', "Comments:") %>
+  <%= text_field_tag('cd[comment]') %> <br>
+
+  Is this cd currently on loan?
+  <%= radio_button_tag('cd[on_loan]', true) %>
+  <%= label_tag(:on_loan_true, "Yes") %>
+  <%= radio_button_tag('cd[on_loan]', false, true) %>
+  <%= label_tag(:on_loan_false, "No") %> <br>
+
+  Have I listened to this cd already?
+  <%= radio_button_tag('cd[listened]', true) %>
+  <%= label_tag(:listened_true, "Yes") %>
+  <%= radio_button_tag('cd[listened]', false, true) %>
+  <%= label_tag(:listened_false, "No") %> <br>
+
+  Is this book a digital copy?
+  <%= radio_button_tag('cd[is_digital]', true) %>
+  <%= label_tag(:is_digital_true, "Yes") %>
+  <%= radio_button_tag('cd[is_digital]', false, true) %>
+  <%= label_tag(:is_digital_false, "No") %> <br>
+
+  Do I already own a copy of this cd?
+  <%= radio_button_tag('cd[is_owned]', true) %>
+  <%= label_tag(:is_owned_true, "Yes") %>
+  <%= radio_button_tag('cd[is_owned]', false, true) %>
+  <%= label_tag(:is_owned_false, "No") %> <br>
+
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+  <%= submit_tag("Submit") %>
 <% end %>
 
+<!-- ********** initialize DataTable ************ -->
+
+<script>
+  $(document).ready( function () {
+    $('#cds-table').DataTable();
+  });
+</script>

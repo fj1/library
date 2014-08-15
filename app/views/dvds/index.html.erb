@@ -35,8 +35,9 @@
 <!-- ********** RAILS FORM ********** -->
 
 <%= form_tag("/dvds", method: "post") do %>
+  
   <%= label_tag('dvd[title]', "Title:") %>
-  <%= text_field_tag('dvd[title]' %>) <br>
+  <%= text_field_tag('dvd[title]') %> <br>
 
   <%= label_tag('dvd[first_name]', "Actor's first name:") %>
   <%= text_field_tag('dvd[first_name]') %> <br>
@@ -87,18 +88,3 @@
   });
 </script>
 
-<!-- **************************************** -->
-
-<% @dvds.each do |dvd| %>
-  <p> <%= dvd.title %> </p>
-    <!-- iterate thru book.authors -->
-  <% dvd.actors.each do |a| %>
-    <p style="color: red"> <%= "#{a.first_name} #{a.last_name}" %> </p>
-  <% end %>
-  <!--  -->
-  <p> <%= dvd.category %> </p>
-  <p> Is this on loan? <%= dvd.on_loan %> </p>
-  <p> Have I watched this? <%= dvd.viewed %> </p>
-  <p> Is this digital? <%= dvd.is_digital %> </p>
-  <p> Do I own this? <%= dvd.is_owned %> </p>
-<% end %>

@@ -40,7 +40,13 @@ class CdsController < ApplicationController
   def update
     @cd = Cd.find(cd_params[:id])
     @cd.update(cd_params)
-    redirect_to root_path
+    redirect_to '/cds'
+  end
+
+  def destroy
+    @cd = Cd.find(params[:id])
+    @cd.destroy
+    render status: 200, json: { status: 200 }
   end
 
   #strong params

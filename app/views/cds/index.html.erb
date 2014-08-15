@@ -36,10 +36,26 @@
         <% end %>
         <td> <%= "#{cd.category}" %> </td>
         <td> <%= "#{cd.comment}" %> </td>
-        <td> <%= "#{cd.on_loan}" %> </td>
-        <td> <%= "#{cd.listened}" %> </td>
-        <td> <%= "#{cd.is_digital}" %> </td>
-        <td> <%= "#{cd.is_owned}" %> </td>
+        <!-- on_loan if/else -->  
+        <td> <% if cd.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
+        <!-- listened if/else -->  
+        <td> <% if cd.listened == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
+        <!-- is_digital if/else -->
+        <td> <% if cd.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> 
+        </td>
+        <!-- is_owned if/else -->
+        <td> <% if cd.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check gift" src="/assets/gift.png"/>
+          <% end %> 
+        </td>
       </tr>
     <% end %>
   </tbody>

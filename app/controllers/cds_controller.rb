@@ -30,7 +30,7 @@ class CdsController < ApplicationController
       ensemble.save!
       CdEnsemble.create!( {cd_id: cd.id, ensemble_id: ensemble.id} )
     end
-    redirect_to root_path
+    redirect_to '/cds'
   end
 
   def edit

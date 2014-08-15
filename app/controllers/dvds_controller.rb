@@ -32,7 +32,7 @@ class DvdsController < ApplicationController
   def update
     @dvd = Dvd.find(dvd_params[:id])
     @dvd.update(dvd_params)
-    redirect_to root_path
+    redirect_to '/dvds'
   end
 
   # strong params

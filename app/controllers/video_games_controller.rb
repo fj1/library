@@ -19,7 +19,7 @@ class VideoGamesController < ApplicationController
   def create
     vg = VideoGame.new(vg_params)
     vg.save!
-    redirect_to root_path
+    redirect_to '/video_games'
   end
 
   def edit

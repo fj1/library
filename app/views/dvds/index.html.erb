@@ -18,7 +18,7 @@
       <tr>
         <td> <%= "#{dvd.title}" %> </td>
         <td> <% dvd.actors.each do |a| %>
-          <%= "#{a.first_name}, #{a.last_name}" %> <br>
+          <%= "#{a.first_name} #{a.last_name}" %> <br>
         <% end %>
         </td>
         <td> <%= "#{dvd.category}" %> </td>
@@ -41,7 +41,7 @@
   <%= label_tag('dvd[first_name]', "Actor's first name:") %>
   <%= text_field_tag('dvd[first_name]') %> <br>
 
-  <%= label_tag('dvd[last_name]', "Author's last name:") %>
+  <%= label_tag('dvd[last_name]', "Actor's last name:") %>
   <%= text_field_tag('dvd[last_name]') %> <br>
 
   <%= label_tag('dvd[category]', "Category:") %>
@@ -56,11 +56,11 @@
   <%= radio_button_tag('dvd[on_loan]', false, true) %>
   <%= label_tag(:on_loan_false, "No") %> <br>
 
-  Have I read this DVD already?
-  <%= radio_button_tag('dvd[read]', true) %>
-  <%= label_tag(:read_true, "Yes") %>
-  <%= radio_button_tag('dvd[read]', false, true) %>
-  <%= label_tag(:read_false, "No") %> <br>
+  Have I watched this DVD already?
+  <%= radio_button_tag('dvd[viewed]', true) %>
+  <%= label_tag(:viewed_true, "Yes") %>
+  <%= radio_button_tag('dvd[viewed]', false, true) %>
+  <%= label_tag(:viewed_false, "No") %> <br>
 
   Is this DVD a digital copy?
   <%= radio_button_tag('dvd[is_digital]', true) %>

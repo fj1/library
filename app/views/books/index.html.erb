@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Author</th>
+      <th>Author(s)</th>
       <th>Category</th>
       <th>Comments</th>
       <th>Loaned out?</th>
@@ -23,19 +23,28 @@
         </td>
         <td> <%= "#{book.category}" %> </td>
         <td> <%= "#{book.comment}" %> </td>
-        <td> <%= "#{book.on_loan}" %> </td>
-        <td> <%= "#{book.read}" %> </td>
-        <td> <%= "#{book.is_digital}" %> </td>
-        <td> <%= "#{book.is_owned}" %> </td>
+        <!-- on_loan if/else -->
+        <td> <% if book.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> </td>
+        <!-- read if/else -->  
+        <td> <% if book.read == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> </td>
+        <!-- is_digital if/else -->
+        <td> <% if book.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> </td>
+        <!-- is_owned if/else -->
+        <td> <% if book.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
+          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% end %> </td>
       </tr>
     <% end %> 
   </tbody>
 </table>
 
 <!-- ********** RAILS FORM ********** -->
-<h2 style="color: red">****** LOOK AT ME, I'M A RAILS-Y FORM ******</h2>
-<h2 style="color: red">****** I'M SO FANCY ******</h2>
-
 
 <%= form_tag("/books", method: "post") do %>
   <%= label_tag('book[title]', "Title:") %>

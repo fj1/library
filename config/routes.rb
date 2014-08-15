@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'video_games#index'
+  root to: 'books#index'
 
   resources :books
   resources :cds

@@ -1,4 +1,5 @@
 class DvdsController < ApplicationController
+
   def index
     @dvds = Dvd.all
     respond_to do |format|
@@ -19,7 +20,7 @@ class DvdsController < ApplicationController
     dvd = Dvd.new(dvd_params)
     actor = Actor.new(actor_params)
     dvd.save!
-    dvd.save!
+    actor.save!
     redirect_to root_path
     ActorDvd.create!( {dvd_id: dvd.id, actor_id: actor.id} )
   end

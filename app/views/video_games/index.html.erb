@@ -1,14 +1,83 @@
-<h1>VideoGames#index</h1>
-<p>Find me in app/views/video_games/index.html.erb</p>
+<!-- ********** DATATABLE ********** -->
 
-<% @vgs.each do |x| %>
-  <p> <%= x.title %> </p>
-  <p> <%= x.console %> </p>
-  <p> <%= x.category %> </p>
-  <p> <%= x.comment %> </p>
-  <p> Is this on loan? <%= x.on_loan %> </p>
-  <p> Have I played this? <%= x.played %> </p>
-  <p> Is this digital? <%= x.is_digital %> </p>
-  <p> Do I own this? <%= x.is_owned %> </p>
+<table id="video-games-table" class="display">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Console</th>
+      <th>Category</th>
+      <th>Comments</th>
+      <th>Loaned out?</th>
+      <th>Already played?</th>
+      <th>Digital?</th>
+      <th>Owned?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vgs.each do |v| %>
+      <tr>    
+        <td> <%= "#{v.title}" %> </td>
+        <td> <%= "#{v.console}" %> </td>
+        <td> <%= "#{v.category}" %> </td>
+        <td> <%= "#{v.comment}" %> </td>
+        <td> <%= "#{v.on_loan}" %> </td>
+        <td> <%= "#{v.played}" %> </td>
+        <td> <%= "#{v.is_digital}" %> </td>
+        <td> <%= "#{v.is_owned}" %> </td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
 
+<!-- ********** RAILS FORM ********** -->
+
+<%= form_tag("/video_games", method: "post") do %>
+  <%= label_tag('video_game[title]', "Title:") %>
+  <%= text_field_tag('video_game[title]') %> <br>
+
+  <%= label_tag('video_game[console]', "What console is this game for?") %>
+  <%= text_field_tag('video_game[console]') %> <br>
+
+  <%= label_tag('video_game[category]', "Category:") %>
+  <%= text_field_tag('video_game[category]') %> <br>
+
+  <%= label_tag('video_game[comment]', "Comment:") %>
+  <%= text_field_tag('video_game[comment]') %> <br>
+
+  Is this video game currently on loan?
+  <%= radio_button_tag('video_game[on_loan]', true) %>
+  <%= label_tag(:on_loan_true, "Yes") %>
+  <%= radio_button_tag('video_game[on_loan]', false, true) %>
+  <%= label_tag(:on_loan_false, "No") %> <br>
+
+  Have I played this video game already?
+  <%= radio_button_tag('video_game[played]', true) %>
+  <%= label_tag(:played_true, "Yes") %>
+  <%= radio_button_tag('video_game[played]', false, true) %>
+  <%= label_tag(:played_false, "No") %> <br>
+
+  Is this video game a digital copy?
+  <%= radio_button_tag('video_game[is_digital]', true) %>
+  <%= label_tag(:is_digital_true, "Yes") %>
+  <%= radio_button_tag('video_game[is_digital]', false, true) %>
+  <%= label_tag(:is_digital_false, "No") %> <br>
+
+  Do I already own a copy of this video game?
+  <%= radio_button_tag('video_game[is_owned]', true) %>
+  <%= label_tag(:is_owned_true, "Yes") %>
+  <%= radio_button_tag('video_game[is_owned]', false, true) %>
+  <%= label_tag(:is_owned_false, "No") %> <br>
+
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+  <%= submit_tag("Submit") %>
 <% end %>
+
+<!-- ********** initialize DataTable ************ -->
+
+<script>
+  $(document).ready( function () {
+    $('#video-games-table').DataTable();
+  });
+</script>
+

@@ -2,16 +2,10 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-
-    # the next line shows @books as a json
-    # render json: @books, include: :authors
-    # i might then be able to use @books like an api
-
     respond_to do |format|
       format.html  # index.html.erb
       format.json  { render :json => @books }
     end
-    
   end
 
   def show

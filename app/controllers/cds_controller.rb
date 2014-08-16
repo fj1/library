@@ -38,8 +38,8 @@ class CdsController < ApplicationController
   end
 
   def update
-    @cd = Cd.find(cd_params[:id])
-    @cd.update(cd_params)
+    @cd = Cd.find(params[:id])
+    @cd.update(params.require(:cd).permit(:id))
     redirect_to '/cds'
   end
 

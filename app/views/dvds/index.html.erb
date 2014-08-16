@@ -3,6 +3,7 @@
 <table id="dvds-table" class="display">
   <thead>
     <tr>
+      <th class="hiddenColumn">ID</th>
       <th>Title</th>
       <th>Actor(s)</th>
       <th>Category</th>
@@ -16,30 +17,35 @@
   <tbody>
     <% @dvds.each do |dvd| %>
       <tr>
-        <td> <%= "#{dvd.title}" %> </td>
-        <td> <% dvd.actors.each do |a| %>
+        <td class="hiddenColumn"> <%= "#{dvd.id}" %> </td>
+        <td class="title"> <%= "#{dvd.title}" %> </td>
+        <td class="actor"> <% dvd.actors.each do |a| %>
           <%= "#{a.first_name} #{a.last_name}" %> <br>
         <% end %>
         </td>
-        <td> <%= "#{dvd.category}" %> </td>
-        <td> <%= "#{dvd.comment}" %> </td>
+        <td class="category"> <%= "#{dvd.category}" %> </td>
+        <td class="comment"> <%= "#{dvd.comment}" %> </td>
         <!-- on_loan if/else -->  
-        <td> <% if dvd.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="loan" data-value="<%= dvd.on_loan %>"> 
+          <% if dvd.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- viewed if/else -->  
-        <td> <% if dvd.viewed == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="viewed" data-value="<%= dvd.viewed %>"> 
+          <% if dvd.viewed == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- is_digital if/else -->
-        <td> <% if dvd.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="digital" data-value="<%= dvd.is_digital %>"> 
+          <% if dvd.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- is_owned if/else -->
-        <td> <% if dvd.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="owned" data-value="<%= dvd.is_owned %>"> 
+          <% if dvd.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check gift" src="/assets/gift.png"/>
           <% end %> 
         </td>
@@ -48,9 +54,14 @@
   </tbody>
 </table>
 
-<!-- ********** RAILS FORM ********** -->
+<button id="deleteButton">Delete selected row</button>
 
-<%= form_tag("/dvds", method: "post") do %>
+<button id="editButton">Edit selected row</button>
+
+<!-- form to CREATE NEW ITEM -->
+<br>•••••••••••• CREATE NEW ITEM FORM ••••••••••••••••••
+
+<%= form_tag("/dvds", method: "post", :id => "create_form") do %>
   
   <%= label_tag('dvd[title]', "Title:") %>
   <%= text_field_tag('dvd[title]') %> <br>
@@ -93,14 +104,176 @@
 
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-  <%= submit_tag("Submit") %>
+  <%= submit_tag("Submit New Item") %>
 <% end %>
 
-<!-- ********** initialize DataTable ************ -->
+<!-- form to EDIT ITEM -->
+•••••••••••• EDIT ITEM FORM ••••••••••••••••••
+
+<%= form_tag("/dvds", method: "put", :id => "edit_form") do %>
+
+  <!-- TO DO: add type="hidden" -->
+  <input id="hiddenId" name="id" value="id">
+  
+  <%= label_tag('dvd[title]', "Title:") %>
+  <%= text_field_tag('dvd[title]') %> <br>
+
+  <%= label_tag('dvd[first_name]', "Actor's first name:") %>
+  <%= text_field_tag('dvd[first_name]') %> <br>
+
+  <%= label_tag('dvd[last_name]', "Actor's last name:") %>
+  <%= text_field_tag('dvd[last_name]') %> <br>
+
+  <%= label_tag('dvd[category]', "Category:") %>
+  <%= text_field_tag('dvd[category]') %> <br>
+
+  <%= label_tag('dvd[comment]', "Comment:") %>
+  <%= text_field_tag('dvd[comment]') %> <br>
+
+  Is this DVD currently on loan?
+  <%= radio_button_tag('dvd[on_loan]', true) %>
+  <%= label_tag(:on_loan_true, "Yes") %>
+  <%= radio_button_tag('dvd[on_loan]', false, true) %>
+  <%= label_tag(:on_loan_false, "No") %> <br>
+
+  Have I watched this DVD already?
+  <%= radio_button_tag('dvd[viewed]', true) %>
+  <%= label_tag(:viewed_true, "Yes") %>
+  <%= radio_button_tag('dvd[viewed]', false, true) %>
+  <%= label_tag(:viewed_false, "No") %> <br>
+
+  Is this DVD a digital copy?
+  <%= radio_button_tag('dvd[is_digital]', true) %>
+  <%= label_tag(:is_digital_true, "Yes") %>
+  <%= radio_button_tag('dvd[is_digital]', false, true) %>
+  <%= label_tag(:is_digital_false, "No") %> <br>
+
+  Do I already own a copy of this DVD?
+  <%= radio_button_tag('dvd[is_owned]', true) %>
+  <%= label_tag(:is_owned_true, "Yes") %>
+  <%= radio_button_tag('dvd[is_owned]', false, true) %>
+  <%= label_tag(:is_owned_false, "No") %> <br>
+
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+  <%= submit_tag("Submit Edited Item") %>
+<% end %>
+
 
 <script>
+  // ********** initialize DataTable ************ 
   $(document).ready( function () {
     $('#dvds-table').DataTable();
   });
+
+  // ********** DataTable select/delete functionality ************
+
+  $(document).ready(function() {
+    var table = $('#dvds-table').DataTable();
+ 
+    // select row
+    $('#dvds-table tbody').on( 'click', 'tr', function () {
+      console.log("the id of the selected row is ", $(this).children().first().text() );
+      if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+      }
+      else {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+      }
+    });
+ 
+    // *********** delete row ***********
+    $('#deleteButton').click(function () {
+      // delete from db via an ajax request that points to the delete route
+      var id = $('.selected').children().first().text().trim();
+      console.log("the id is ", id);
+      // ajax request that points to the delete route
+      $.ajax({
+        url: '/dvds/' + id,
+        type: 'DELETE',
+        // send authenticity_token
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        success: function() {
+          console.log("ajax call worked");
+        },
+        error: function() {
+          console.log("ajax call failed");
+        }
+      })
+      // delete from table
+      table.row('.selected').remove().draw(false);
+    });
+
+    // *********** update row ***********
+    $('#editButton').click(function () {
+      // grab info from selected row
+      var id = $('.selected').children().first().text().trim();
+      console.log("id: ", id);
+      var title = $('.selected .title').text().trim();
+      console.log("title:", title);
+      var actor = $('.selected .actor').text().trim();
+      console.log("actors are ", actor);
+      var category = $('.selected .category').text().trim();
+      console.log("category: ", category);
+      var comment = $('.selected .comment').text().trim();
+      console.log("comment:", comment);
+      var loan = $('.selected .loan').data('value');
+      console.log("loan is ", loan);
+      var viewed = $('.selected .viewed').data('value');
+      console.log("viewed: ", viewed);
+      var digital = $('.selected .digital').data('value');
+      console.log("digital", digital);
+      var owned = $('.selected .owned').data('value');
+      console.log("owned: ", owned);
+
+      // update route to point to selected dvd's id
+      $("#edit_form").attr("action", "/dvds/" + id)
+      
+      // hide actor input fields for now
+      $('#edit_form #dvd_first_name').css("display", "none");
+      var l = $('#edit_form label').get(1);
+      $(l).css("display", "none");
+      $('#edit_form #dvd_last_name').css("display", "none");
+      var la = $('#edit_form label').get(2);
+      $(la).css("display", "none");
+
+      // populate form with the selected row's info
+      $('#edit_form #hiddenId').val(id);
+      $('#edit_form #dvd_title').val(title);
+      $('#edit_form #dvd_name').val(actor);
+      $('#edit_form #dvd_category').val(category);
+      $('#edit_form #dvd_comment').val(comment);
+      // if/else for on_loan radio button
+      if (loan === true) {
+        $('#edit_form #dvd_on_loan_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #dvd_on_loan_false').prop('checked', true);
+      }
+      // if/else for viewed radio button
+      if (viewed === true) {
+        $('#edit_form #dvd_viewed_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #dvd_viewed_false').prop('checked', true);
+      }
+      // if/else for digital radio button
+      if (digital === true) {
+        $('#edit_form #dvd_is_digital_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #dvd_is_digital_false').prop('checked', true);
+      }
+      // if/else for owned radio button
+      if (owned === true) {
+        $('#edit_form #dvd_is_owned_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #dvd_is_owned_false').prop('checked', true);
+      }
+
+    }); // end editButton.click
+  }); // end document.ready
 </script>
 

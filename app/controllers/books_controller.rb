@@ -22,7 +22,7 @@ class BooksController < ApplicationController
     # use ! so the form will throw an error
     book.save!
     author.save!
-    redirect_to root_path
+    redirect_to '/books'
     AuthorBook.create!({book_id: book.id, author_id: author.id})
   end
 
@@ -31,9 +31,15 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(book_params[:id])
-    @book.update(book_params)
+    @book = Book.find(params[:id])
+    @book.update(params.require(:book).permit(:id))
     redirect_to '/books'
+  end
+
+  def destroy
+    @book = Book.find(params[:id])
+    @book.destroy
+    render status: 200, json: { status: 200 }
   end
 
   # strong params

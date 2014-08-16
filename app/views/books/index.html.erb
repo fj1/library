@@ -3,6 +3,7 @@
 <table id="books-table" class="display">
   <thead>
     <tr>
+      <th class="hiddenColumn">ID</th>
       <th>Title</th>
       <th>Author(s)</th>
       <th>Category</th>
@@ -15,31 +16,36 @@
   </thead>
   <tbody>
     <% @books.each do |book| %>
-      <tr>    
-        <td> <%= "#{book.title}" %> </td>
-        <td> <% book.authors.each do |a| %> 
+      <tr>
+        <td class="hiddenColumn"> <%= "#{book.id}" %> </td>    
+        <td class="title"> <%= "#{book.title}" %> </td>
+        <td class="author"> <% book.authors.each do |a| %> 
           <%= "#{a.first_name} #{a.last_name}" %> <br>
         <% end %>
         </td>
-        <td> <%= "#{book.category}" %> </td>
-        <td> <%= "#{book.comment}" %> </td>
+        <td class="category"> <%= "#{book.category}" %> </td>
+        <td class="comment"> <%= "#{book.comment}" %> </td>
         <!-- on_loan if/else -->
-        <td> <% if book.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="loan" data-value="<%= book.on_loan %>"> 
+          <% if book.on_loan == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- read if/else -->  
-        <td> <% if book.read == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="read" data-value="<%= book.read %>"> 
+          <% if book.read == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- is_digital if/else -->
-        <td> <% if book.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="digital" data-value="<%= book.is_digital %>"> 
+          <% if book.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- is_owned if/else -->
-        <td> <% if book.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
+        <td class="owned" data-value="<%= book.is_owned %>"> 
+          <% if book.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
           <% else %> <img class="check gift" src="/assets/gift.png"/>
           <% end %> 
         </td>
@@ -48,9 +54,15 @@
   </tbody>
 </table>
 
-<!-- ********** RAILS FORM ********** -->
+<button id="deleteButton">Delete selected row</button>
 
-<%= form_tag("/books", method: "post") do %>
+<button id="editButton">Edit selected row</button>
+
+<!-- form to CREATE NEW ITEM -->
+<br>•••••••••••• CREATE NEW ITEM FORM ••••••••••••••••••
+
+<%= form_tag("/books", method: "post", :id => "create_form") do %>
+
   <%= label_tag('book[title]', "Title:") %>
   <%= text_field_tag('book[title]') %> <br>
 
@@ -92,8 +104,61 @@
 
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-  <%= submit_tag("Submit") %>
+  <%= submit_tag("Submit New Item") %>
 <% end %>
+
+<!-- form to EDIT ITEM -->
+•••••••••••• EDIT ITEM FORM ••••••••••••••••••
+
+<%= form_tag("/books", method: "put", :id => "edit_form") do %>
+  
+  <!-- TO DO: add type="hidden" -->
+  <input id="hiddenId" name="id" value="id">
+
+  <%= label_tag('book[title]', "Title:") %>
+  <%= text_field_tag('book[title]') %> <br>
+
+  <%= label_tag('book[first_name]', "Author's first name:") %>
+  <%= text_field_tag('book[first_name]') %> <br>
+
+  <%= label_tag('book[last_name]', "Author's last name:") %>
+  <%= text_field_tag('book[last_name]') %> <br>
+
+  <%= label_tag('book[category]', "Category:") %>
+  <%= text_field_tag('book[category]') %> <br>
+
+  <%= label_tag('book[comment]', "Comment:") %>
+  <%= text_field_tag('book[comment]') %> <br>
+
+  Is this book currently on loan?
+  <%= radio_button_tag('book[on_loan]', true) %>
+  <%= label_tag(:on_loan_true, "Yes") %>
+  <%= radio_button_tag('book[on_loan]', false, true) %>
+  <%= label_tag(:on_loan_false, "No") %> <br>
+
+  Have I read this book already?
+  <%= radio_button_tag('book[read]', true) %>
+  <%= label_tag(:read_true, "Yes") %>
+  <%= radio_button_tag('book[read]', false, true) %>
+  <%= label_tag(:read_false, "No") %> <br>
+
+  Is this book a digital copy?
+  <%= radio_button_tag('book[is_digital]', true) %>
+  <%= label_tag(:is_digital_true, "Yes") %>
+  <%= radio_button_tag('book[is_digital]', false, true) %>
+  <%= label_tag(:is_digital_false, "No") %> <br>
+
+  Do I already own a copy of this book?
+  <%= radio_button_tag('book[is_owned]', true) %>
+  <%= label_tag(:is_owned_true, "Yes") %>
+  <%= radio_button_tag('book[is_owned]', false, true) %>
+  <%= label_tag(:is_owned_false, "No") %> <br>
+
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+  <%= submit_tag("Submit Edited Item") %>
+<% end %>
+
 
 <!-- ********** initialize DataTable ************ -->
 
@@ -101,10 +166,118 @@
   $(document).ready( function () {
     $('#books-table').DataTable();
   });
+
+  // ********** DataTable select/delete functionality ************
+
+  $(document).ready(function() {
+    var table = $('#books-table').DataTable();
+ 
+    // select row
+    $('#books-table tbody').on( 'click', 'tr', function () {
+      console.log("the id of the selected row is ", $(this).children().first().text() );
+      if ( $(this).hasClass('selected') ) {
+        $(this).removeClass('selected');
+      }
+      else {
+        table.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+      }
+    });
+
+    // *********** delete row ***********
+    $('#deleteButton').click(function () {
+      // delete from db via an ajax request that points to the delete route
+      var id = $('.selected').children().first().text().trim();
+      console.log("the id is ", id);
+      // ajax request that points to the delete route
+      $.ajax({
+        url: '/books/' + id,
+        type: 'DELETE',
+        // send authenticity_token
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        success: function() {
+          console.log("ajax call worked");
+        },
+        error: function() {
+          console.log("ajax call failed");
+        }
+      })
+      // delete from table
+      table.row('.selected').remove().draw(false);
+    });
+
+    // *********** update row ***********
+    $('#editButton').click(function () {
+      // grab info from selected row
+      var id = $('.selected').children().first().text().trim();
+      console.log("id: ", id);
+      var title = $('.selected .title').text().trim();
+      console.log("title: ", title);
+      var author = $('.selected .author').text().trim();
+      console.log("author: ", author);
+      var category = $('.selected .category').text().trim();
+      console.log("category: ", category);
+      var comment = $('.selected .comment').text().trim();
+      console.log("comment: ", comment);
+      var loan = $('.selected .loan').data('value');
+      console.log("loan is ", loan);
+      var read = $('.selected .read').data('value');
+      console.log("read: ", read);
+      var digital = $('.selected .digital').data('value');
+      console.log("digital: ", digital);
+      var owned = $('.selected .owned').data('value');
+      console.log("owned: ", owned);
+
+      // update route to point to selected book's id
+      $("#edit_form").attr("action", "/books/" + id)
+
+      // hide author input fields for now
+      $('#edit_form #book_first_name').css("display", "none");
+      var l = $('#edit_form label').get(1);
+      $(l).css("display", "none");
+      $('#edit_form #book_last_name').css("display", "none");
+      var la = $('#edit_form label').get(2);
+      $(la).css("display", "none");
+
+      // populate form with the selected row's info
+      $('#edit_form #hiddenId').val(id);
+      $('#edit_form #book_title').val(title);
+      $('#edit_form #book_name').val(author);
+      $('#edit_form #book_category').val(category);
+      $('#edit_form #book_comment').val(comment);
+      // if/else for on_loan radio button
+      if (loan === true) {
+        $('#edit_form #book_on_loan_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #book_on_loan_false').prop('checked', true);
+      }
+      // if/else for read radio button
+      if (read === true) {
+        $('#edit_form #book_read_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #book_read_false').prop('checked', true);
+      }
+      // if/else for digital radio button
+      if (digital === true) {
+        $('#edit_form #book_is_digital_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #book_is_digital_false').prop('checked', true);
+      }
+      // if/else for owned radio button
+      if (owned === true) {
+        $('#edit_form #book_is_owned_true').prop('checked', true);
+      }
+      else {
+        $('#edit_form #book_is_owned_false').prop('checked', true);
+      }
+
+    }); // end editButton.click
+  }); // end document.ready
+
 </script>
-
-
-
 
 
 

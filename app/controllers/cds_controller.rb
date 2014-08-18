@@ -27,11 +27,15 @@ class CdsController < ApplicationController
         CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
       end
     end
-    # logic to check for .present on ensemble
-    if ensemble_params[:name].present?
-      ensemble = Ensemble.new(ensemble_params)
-      ensemble.save!
-      CdEnsemble.create!( {cd_id: cd.id, ensemble_id: ensemble.id} )
+    # logic to check for .any on ensemble
+    puts "ENSEMBLES: #{ensemble_params.inspect}"
+    # ensemble_params = ["Band Uno", "Band Segundo"]
+    if ensemble_params.any?
+      ensemble_params.each do |e|
+        ensemble = Ensemble.new(name: e)
+        ensemble.save!
+        CdEnsemble.create!( {cd_id: cd.id, ensemble_id: ensemble.id} )
+      end
     end
     redirect_to '/cds'
   end
@@ -64,7 +68,7 @@ class CdsController < ApplicationController
   end
 
   def ensemble_params
-    params.require(:cd).permit(:name)
+    params[:ensembles]
   end
 
 end

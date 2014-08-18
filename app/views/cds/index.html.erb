@@ -89,10 +89,13 @@
           <%= label_tag('cd[full_name][]', "Musician's name:") %>
           <%= text_field_tag('cd[full_name][]') %> <br>
         </div>
-        <button type="button" class="add">Add a Musician</button>
+        <button type="button" class="addMus">Add a Musician</button>
 
-        <%= label_tag('cd[ensemble]', "Band's name:") %>
-        <%= text_field_tag('cd[name]') %> <br>
+        <div id="ensembleWrapper">
+          <%= label_tag('ensembles[]', "Band's name:") %>
+          <%= text_field_tag('ensembles[]') %> <br>
+        </div>
+        <button type="button" class="addEns">Add a Band</button>
 
         <%= label_tag('cd[category]', "Musical category:") %>
         <%= text_field_tag('cd[category]') %> <br>
@@ -203,10 +206,17 @@
   });
 
   // ********** add-a-musician button *************
-  $('.add').on('click', function(e) {
+  $('.addMus').on('click', function(e) {
     e.preventDefault();
-    $('#musicianWrapper').append("<label for='cd_full_name[]'>Musician's Name:</label>");
-    $('#musicianWrapper').append("<input id='cd_full_name[]' name='cd[full_name][]' type='text'>");
+    $('#musicianWrapper').append("<label for='cd_full_name'>Musician's Name:</label>");
+    $('#musicianWrapper').append("<input id='cd_full_name' name='cd[full_name][]' type='text'>");
+  });
+
+  // ********** add-a-ensemble button *************
+  $('.addEns').on('click', function(e) {
+    e.preventDefault();
+    $('#ensembleWrapper').append("<label for='ensembles'>Band's Name:</label>");
+    $('#ensembleWrapper').append("<input id='ensembles' name='ensembles[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************

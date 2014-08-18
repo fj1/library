@@ -17,10 +17,12 @@ class DvdsController < ApplicationController
 
   def create
     dvd = Dvd.new(dvd_params)
-    actor = Actor.new(actor_params)
     dvd.save!
-    actor.save!
-    ActorDvd.create!( {dvd_id: dvd.id, actor_id: actor.id} )
+    actor_params.each do |name|
+      actor = Actor.new(full_name: name)
+      actor.save!
+      ActorDvd.create!( {dvd_id: dvd.id, actor_id: actor.id} )
+    end
     redirect_to '/dvds'
   end
 
@@ -48,7 +50,7 @@ class DvdsController < ApplicationController
   end
 
   def actor_params
-    params.require(:dvd).permit(:full_name)
+    params[:actors]
   end
 end
 

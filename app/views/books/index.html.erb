@@ -71,6 +71,7 @@
         <%= text_field_tag('book[title]') %> <br>
 
         <div id="authorWrapper">
+          <!-- the [] in authors[] tells rails to accept an array -->
           <%= label_tag('authors[]', "Author's name:") %>
           <%= text_field_tag('authors[]') %> <br>
         </div>

@@ -20,7 +20,7 @@
         <td class="hiddenColumn"> <%= "#{dvd.id}" %> </td>
         <td class="title"> <%= "#{dvd.title}" %> </td>
         <td class="actor"> <% dvd.actors.each do |a| %>
-          <%= "#{a.full_name}" %> <br>
+          <span><%= "#{a.full_name}" %></span> <br>
         <% end %>
         </td>
         <td class="category"> <%= "#{dvd.category}" %> </td>
@@ -67,45 +67,48 @@
     <div class="content active" id="panel2-1">
      <%= form_tag("/dvds", method: "post", :id => "create_form") do %>
        
-       <%= label_tag('dvd[title]', "Title:") %>
-       <%= text_field_tag('dvd[title]') %> <br>
+      <%= label_tag('dvd[title]', "Title:") %>
+      <%= text_field_tag('dvd[title]') %> <br>
 
-       <%= label_tag('dvd[full_name]', "Actor's name:") %>
-       <%= text_field_tag('dvd[full_name]') %> <br>
+      <div id="actorWrapper">
+        <%= label_tag('actors[]', "Actor's name:") %>
+        <%= text_field_tag('actors[]') %> <br>
+      </div>
+      <button type="button" class="addActor">Add an Actor</button>
 
-       <%= label_tag('dvd[category]', "Category:") %>
-       <%= text_field_tag('dvd[category]') %> <br>
+      <%= label_tag('dvd[category]', "Category:") %>
+      <%= text_field_tag('dvd[category]') %> <br>
 
-       <%= label_tag('dvd[comment]', "Comment:") %>
-       <%= text_field_tag('dvd[comment]') %> <br>
+      <%= label_tag('dvd[comment]', "Comment:") %>
+      <%= text_field_tag('dvd[comment]') %> <br>
 
-       Is this DVD currently on loan?
-       <%= radio_button_tag('dvd[on_loan]', true) %>
-       <%= label_tag(:on_loan_true, "Yes") %>
-       <%= radio_button_tag('dvd[on_loan]', false, true) %>
-       <%= label_tag(:on_loan_false, "No") %> <br>
+      Is this DVD currently on loan?
+      <%= radio_button_tag('dvd[on_loan]', true) %>
+      <%= label_tag(:on_loan_true, "Yes") %>
+      <%= radio_button_tag('dvd[on_loan]', false, true) %>
+      <%= label_tag(:on_loan_false, "No") %> <br>
 
-       Have I watched this DVD already?
-       <%= radio_button_tag('dvd[viewed]', true) %>
-       <%= label_tag(:viewed_true, "Yes") %>
-       <%= radio_button_tag('dvd[viewed]', false, true) %>
-       <%= label_tag(:viewed_false, "No") %> <br>
+      Have I watched this DVD already?
+      <%= radio_button_tag('dvd[viewed]', true) %>
+      <%= label_tag(:viewed_true, "Yes") %>
+      <%= radio_button_tag('dvd[viewed]', false, true) %>
+      <%= label_tag(:viewed_false, "No") %> <br>
 
-       Is this DVD a digital copy?
-       <%= radio_button_tag('dvd[is_digital]', true) %>
-       <%= label_tag(:is_digital_true, "Yes") %>
-       <%= radio_button_tag('dvd[is_digital]', false, true) %>
-       <%= label_tag(:is_digital_false, "No") %> <br>
+      Is this DVD a digital copy?
+      <%= radio_button_tag('dvd[is_digital]', true) %>
+      <%= label_tag(:is_digital_true, "Yes") %>
+      <%= radio_button_tag('dvd[is_digital]', false, true) %>
+      <%= label_tag(:is_digital_false, "No") %> <br>
 
-       Do I already own a copy of this DVD?
-       <%= radio_button_tag('dvd[is_owned]', true) %>
-       <%= label_tag(:is_owned_true, "Yes") %>
-       <%= radio_button_tag('dvd[is_owned]', false, true) %>
-       <%= label_tag(:is_owned_false, "No") %> <br>
+      Do I already own a copy of this DVD?
+      <%= radio_button_tag('dvd[is_owned]', true) %>
+      <%= label_tag(:is_owned_true, "Yes") %>
+      <%= radio_button_tag('dvd[is_owned]', false, true) %>
+      <%= label_tag(:is_owned_false, "No") %> <br>
 
-       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-       <%= submit_tag("Submit New Item") %>
+     <%= submit_tag("Submit New Item") %>
      <% end %>
     </div> <!-- end id="panel2-1" -->
 
@@ -175,6 +178,13 @@
   // ********** initialize DataTable ************ 
   $(document).ready( function () {
     $('#dvds-table').DataTable();
+  });
+
+  // ********** add-a-musician button *************
+  $('.addActor').on('click', function(e) {
+    e.preventDefault();
+    $('#actorWrapper').append("<label for='actors'>Actor's Name:</label>");
+    $('#actorWrapper').append("<input id='actors' name='actors[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************

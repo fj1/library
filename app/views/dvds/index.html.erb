@@ -19,7 +19,7 @@
       <tr>
         <td class="hiddenColumn"> <%= "#{dvd.id}" %> </td>
         <td class="title"> <%= "#{dvd.title}" %> </td>
-        <td class="actor"> <% dvd.actors.each do |a| %>
+        <td class="actors"> <% dvd.actors.each do |a| %>
           <span><%= "#{a.full_name}" %></span> <br>
         <% end %>
         </td>
@@ -70,7 +70,7 @@
       <%= label_tag('dvd[title]', "Title:") %>
       <%= text_field_tag('dvd[title]') %> <br>
 
-      <div id="actorWrapper">
+      <div class="actorWrapper">
         <%= label_tag('actors[]', "Actor's name:") %>
         <%= text_field_tag('actors[]') %> <br>
       </div>
@@ -124,8 +124,11 @@
         <%= label_tag('dvd[title]', "Title:") %>
         <%= text_field_tag('dvd[title]') %> <br>
 
-        <%= label_tag('dvd[full_name]', "Actor's name:") %>
-        <%= text_field_tag('dvd[full_name]') %> <br>
+        <div class="actorWrapper">
+          <%= label_tag('actors[]', "Actor's name:") %>
+          <%= text_field_tag('actors[]') %> <br>
+        </div>
+        <button type="button" class="addActor">Add an Actor</button>
 
         <%= label_tag('dvd[category]', "Category:") %>
         <%= text_field_tag('dvd[category]') %> <br>
@@ -183,8 +186,8 @@
   // ********** add-a-musician button *************
   $('.addActor').on('click', function(e) {
     e.preventDefault();
-    $('#actorWrapper').append("<label for='actors'>Actor's Name:</label>");
-    $('#actorWrapper').append("<input id='actors' name='actors[]' type='text'>");
+    $(this).before("<label for='actors'>Actor's Name:</label>");
+    $(this).before("<input id='actors' name='actors[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************
@@ -233,8 +236,24 @@
       console.log("id: ", id);
       var title = $('.selected .title').text().trim();
       console.log("title:", title);
-      var actor = $('.selected .actor').text().trim();
-      console.log("actors are ", actor);
+      // var actor = $('.selected .actor').text().trim();
+      // console.log("actors are ", actor);
+
+      // iterate through musicians in the table
+      var actors = [];
+      $('.selected .actors span').each(function(index, element) {
+        var name = $(element).text();
+        console.log("element is ", name);
+        actors.push(name);
+      });
+      console.log("actors are ", actors);
+
+
+
+
+
+
+      // continue to grab info
       var category = $('.selected .category').text().trim();
       console.log("category: ", category);
       var comment = $('.selected .comment').text().trim();
@@ -254,7 +273,20 @@
       // populate form with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #dvd_title').val(title);
-      $('#edit_form #dvd_full_name').val(actor);
+      // $('#edit_form #dvd_full_name').val(actor);
+
+
+      // populate actors: 1st clear out the wrapper with .empty
+      $('#edit_form .actorWrapper').empty();
+      for (var i = 0; i < actors.length; i++) {
+        // then create a label and input for each element in actors
+        console.log("actors[i]", actors[i]);
+        $('#edit_form .actorWrapper').append("<label for='actors'>Actor's Name:</label>");
+        $('#edit_form .actorWrapper').append("<input id='actors' name='actors[]' type='text' value='" + actors[i] + "'>");
+      }
+
+
+
       $('#edit_form #dvd_category').val(category);
       $('#edit_form #dvd_comment').val(comment);
       // if/else for on_loan radio button

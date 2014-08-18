@@ -18,12 +18,13 @@ class BooksController < ApplicationController
 
   def create
     book = Book.new(book_params)
-    author = Author.new(author_params)
-    # use ! so the form will throw an error
-    book.save!
-    author.save!
+    book.save!    
+    author_params.each do |name|
+      author = Author.new(full_name: name)
+      author.save!
+      AuthorBook.create!({book_id: book.id, author_id: author.id})
+    end
     redirect_to '/books'
-    AuthorBook.create!({book_id: book.id, author_id: author.id})
   end
 
   def edit
@@ -50,7 +51,7 @@ class BooksController < ApplicationController
   end
 
   def author_params
-    params.require(:book).permit(:full_name)
+    params[:authors]
   end
 
 end

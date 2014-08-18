@@ -20,7 +20,7 @@
         <td class="hiddenColumn"> <%= "#{book.id}" %> </td>    
         <td class="title"> <%= "#{book.title}" %> </td>
         <td class="author"> <% book.authors.each do |a| %> 
-          <%= "#{a.full_name}" %> <br>
+          <span><%= "#{a.full_name}" %> <br></span>
         <% end %>
         </td>
         <td class="category"> <%= "#{book.category}" %> </td>
@@ -70,8 +70,11 @@
         <%= label_tag('book[title]', "Title:") %>
         <%= text_field_tag('book[title]') %> <br>
 
-        <%= label_tag('book[full_name]', "Author's name:") %>
-        <%= text_field_tag('book[full_name]') %> <br>
+        <div id="authorWrapper">
+          <%= label_tag('authors[]', "Author's name:") %>
+          <%= text_field_tag('authors[]') %> <br>
+        </div>
+        <button type="button" class="addAuth">Add an Author</button>
 
         <%= label_tag('book[category]', "Category:") %>
         <%= text_field_tag('book[category]') %> <br>
@@ -177,6 +180,13 @@
 <script>
   $(document).ready( function () {
     $('#books-table').DataTable();
+  });
+
+  // ********** add-an-author button *************
+  $('.addAuth').on('click', function(e) {
+    e.preventDefault();
+    $('#authorWrapper').append("<label for='authors'>Author's Name:</label>");
+    $('#authorWrapper').append("<input id='authors' name='authors[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************

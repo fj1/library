@@ -48,7 +48,7 @@ class DvdsController < ApplicationController
   end
 
   def actor_params
-    params.require(:dvd).permit(:first_name, :last_name)
+    params.require(:dvd).permit(:full_name)
   end
 end
 

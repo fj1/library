@@ -20,7 +20,7 @@
         <td class="hiddenColumn"> <%= "#{dvd.id}" %> </td>
         <td class="title"> <%= "#{dvd.title}" %> </td>
         <td class="actor"> <% dvd.actors.each do |a| %>
-          <%= "#{a.first_name} #{a.last_name}" %> <br>
+          <%= "#{a.full_name}" %> <br>
         <% end %>
         </td>
         <td class="category"> <%= "#{dvd.category}" %> </td>
@@ -71,11 +71,8 @@
        <%= label_tag('dvd[title]', "Title:") %>
        <%= text_field_tag('dvd[title]') %> <br>
 
-       <%= label_tag('dvd[first_name]', "Actor's first name:") %>
-       <%= text_field_tag('dvd[first_name]') %> <br>
-
-       <%= label_tag('dvd[last_name]', "Actor's last name:") %>
-       <%= text_field_tag('dvd[last_name]') %> <br>
+       <%= label_tag('dvd[full_name]', "Actor's name:") %>
+       <%= text_field_tag('dvd[full_name]') %> <br>
 
        <%= label_tag('dvd[category]', "Category:") %>
        <%= text_field_tag('dvd[category]') %> <br>
@@ -126,11 +123,8 @@
         <%= label_tag('dvd[title]', "Title:") %>
         <%= text_field_tag('dvd[title]') %> <br>
 
-        <%= label_tag('dvd[first_name]', "Actor's first name:") %>
-        <%= text_field_tag('dvd[first_name]') %> <br>
-
-        <%= label_tag('dvd[last_name]', "Actor's last name:") %>
-        <%= text_field_tag('dvd[last_name]') %> <br>
+        <%= label_tag('dvd[full_name]', "Actor's name:") %>
+        <%= text_field_tag('dvd[full_name]') %> <br>
 
         <%= label_tag('dvd[category]', "Category:") %>
         <%= text_field_tag('dvd[category]') %> <br>
@@ -250,17 +244,17 @@
       $("#edit_form").attr("action", "/dvds/" + id)
       
       // hide actor input fields for now
-      $('#edit_form #dvd_first_name').css("display", "none");
-      var l = $('#edit_form label').get(1);
-      $(l).css("display", "none");
-      $('#edit_form #dvd_last_name').css("display", "none");
-      var la = $('#edit_form label').get(2);
-      $(la).css("display", "none");
+      // $('#edit_form #dvd_first_name').css("display", "none");
+      // var l = $('#edit_form label').get(1);
+      // $(l).css("display", "none");
+      // $('#edit_form #dvd_last_name').css("display", "none");
+      // var la = $('#edit_form label').get(2);
+      // $(la).css("display", "none");
 
       // populate form with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #dvd_title').val(title);
-      $('#edit_form #dvd_name').val(actor);
+      $('#edit_form #dvd_full_name').val(actor);
       $('#edit_form #dvd_category').val(category);
       $('#edit_form #dvd_comment').val(comment);
       // if/else for on_loan radio button

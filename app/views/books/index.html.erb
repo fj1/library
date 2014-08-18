@@ -20,7 +20,7 @@
         <td class="hiddenColumn"> <%= "#{book.id}" %> </td>    
         <td class="title"> <%= "#{book.title}" %> </td>
         <td class="author"> <% book.authors.each do |a| %> 
-          <%= "#{a.first_name} #{a.last_name}" %> <br>
+          <%= "#{a.full_name}" %> <br>
         <% end %>
         </td>
         <td class="category"> <%= "#{book.category}" %> </td>
@@ -71,11 +71,8 @@
         <%= label_tag('book[title]', "Title:") %>
         <%= text_field_tag('book[title]') %> <br>
 
-        <%= label_tag('book[first_name]', "Author's first name:") %>
-        <%= text_field_tag('book[first_name]') %> <br>
-
-        <%= label_tag('book[last_name]', "Author's last name:") %>
-        <%= text_field_tag('book[last_name]') %> <br>
+        <%= label_tag('book[full_name]', "Author's name:") %>
+        <%= text_field_tag('book[full_name]') %> <br>
 
         <%= label_tag('book[category]', "Category:") %>
         <%= text_field_tag('book[category]') %> <br>
@@ -127,11 +124,8 @@
       <%= label_tag('book[title]', "Title:") %>
       <%= text_field_tag('book[title]') %> <br>
 
-      <%= label_tag('book[first_name]', "Author's first name:") %>
-      <%= text_field_tag('book[first_name]') %> <br>
-
-      <%= label_tag('book[last_name]', "Author's last name:") %>
-      <%= text_field_tag('book[last_name]') %> <br>
+      <%= label_tag('book[full_name]', "Author's name:") %>
+      <%= text_field_tag('book[full_name]') %> <br>
 
       <%= label_tag('book[category]', "Category:") %>
       <%= text_field_tag('book[category]') %> <br>
@@ -252,17 +246,17 @@
       $("#edit_form").attr("action", "/books/" + id)
 
       // hide author input fields for now
-      $('#edit_form #book_first_name').css("display", "none");
-      var l = $('#edit_form label').get(1);
-      $(l).css("display", "none");
-      $('#edit_form #book_last_name').css("display", "none");
-      var la = $('#edit_form label').get(2);
-      $(la).css("display", "none");
+      // $('#edit_form #book_first_name').css("display", "none");
+      // var l = $('#edit_form label').get(1);
+      // $(l).css("display", "none");
+      // $('#edit_form #book_last_name').css("display", "none");
+      // var la = $('#edit_form label').get(2);
+      // $(la).css("display", "none");
 
       // populate form with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #book_title').val(title);
-      $('#edit_form #book_name').val(author);
+      $('#edit_form #book_full_name').val(author);
       $('#edit_form #book_category').val(category);
       $('#edit_form #book_comment').val(comment);
       // if/else for on_loan radio button

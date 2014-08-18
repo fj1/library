@@ -25,7 +25,7 @@
           <td class="musicians"></td>
         <% else %>
           <td class="musicians"> <% cd.musicians.each do |m| %>
-            <%= "#{m.first_name} #{m.last_name}" %> <br>
+            <%= "#{m.full_name}" %> <br>
           <% end %>
           </td>
         <% end %>  
@@ -86,11 +86,8 @@
         <%= label_tag('cd[title]', "Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
-        <%= label_tag('cd[first_name]', "Musician's first name:") %>
-        <%= text_field_tag('cd[first_name]') %> <br>
-
-        <%= label_tag('cd[last_name]', "Musician's last name:") %>
-        <%= text_field_tag('cd[last_name]') %> <br>
+        <%= label_tag('cd[full_name]', "Musician's name:") %>
+        <%= text_field_tag('cd[full_name]') %> <br>
 
         <%= label_tag('cd[ensemble]', "Band's name:") %>
         <%= text_field_tag('cd[name]') %> <br>
@@ -144,11 +141,8 @@
         <%= label_tag('cd[title]', "Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
-        <%= label_tag('cd[first_name]', "Musician's first name:") %>
-        <%= text_field_tag('cd[first_name]') %> <br>
-
-        <%= label_tag('cd[last_name]', "Musician's last name:") %>
-        <%= text_field_tag('cd[last_name]') %> <br>
+        <%= label_tag('cd[full_name]', "Musician's name:") %>
+        <%= text_field_tag('cd[full_name]') %> <br>
 
         <%= label_tag('cd[ensemble]', "Band's name:") %>
         <%= text_field_tag('cd[name]') %> <br>
@@ -266,16 +260,17 @@
       $("#edit_form").attr("action", "/cds/" + id)
       
       // hide musicians input fields for now
-      $('#edit_form #cd_first_name').css("display", "none");
-      var l = $('#edit_form label').get(1);
-      $(l).css("display", "none");
-      $('#edit_form #cd_last_name').css("display", "none");
-      var la = $('#edit_form label').get(2);
-      $(la).css("display", "none");
+      // $('#edit_form #cd_first_name').css("display", "none");
+      // var l = $('#edit_form label').get(1);
+      // $(l).css("display", "none");
+      // $('#edit_form #cd_last_name').css("display", "none");
+      // var la = $('#edit_form label').get(2);
+      // $(la).css("display", "none");
 
       // populate form with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #cd_title').val(title);
+      $('#edit_form #cd_full_name').val(musicians);
       $('#edit_form #cd_name').val(ensembles);
       $('#edit_form #cd_category').val(category);
       $('#edit_form #cd_comment').val(comment);

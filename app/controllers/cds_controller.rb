@@ -19,7 +19,7 @@ class CdsController < ApplicationController
     cd = Cd.new(cd_params)
     cd.save!
     # logic to check for .present on musician
-    if musician_params[:first_name].present? || musician_params[:last_name].present?
+    if musician_params[:full_name].present? 
       musician = Musician.new(musician_params)
       musician.save!
       CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
@@ -57,7 +57,7 @@ class CdsController < ApplicationController
   end
 
   def musician_params
-    params.require(:cd).permit(:first_name, :last_name)
+    params.require(:cd).permit(:full_name)
   end
 
   def ensemble_params

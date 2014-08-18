@@ -21,6 +21,7 @@ body {
 
 .navbar {
   height: 175px;
+  padding-top: 10px;
 }
 
 button, .button, #editButton {

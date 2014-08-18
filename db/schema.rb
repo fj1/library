@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140818040417) do
+ActiveRecord::Schema.define(version: 20140818045532) do
 
   create_table "actor_dvds", force: true do |t|
     t.integer  "actor_id"
@@ -41,10 +41,9 @@ ActiveRecord::Schema.define(version: 20140818040417) do
   add_index "author_books", ["book_id"], name: "index_author_books_on_book_id"
 
   create_table "authors", force: true do |t|
-    t.string   "last_name"
-    t.string   "first_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_name"
   end
 
   create_table "books", force: true do |t|

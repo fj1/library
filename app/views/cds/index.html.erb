@@ -76,7 +76,6 @@
     <li class="tab-title active"><a href="#panel2-1">Create New Item</a></li>
     <li class="tab-title"><a href="#panel2-2">Edit Item</a></li>
     <li class="tab-title"><a href="#panel2-3">Delete Item</a></li>
-    <!-- <li class="tab-title"><a href="#panel2-4">Tab 4</a></li> -->
   </ul>
   <div class="tabs-content">
     <!-- ***** 1ST TAB: CREATE NEW ITEM ***** -->
@@ -259,14 +258,6 @@
       // update route to point to selected cd's id
       $("#edit_form").attr("action", "/cds/" + id)
       
-      // hide musicians input fields for now
-      // $('#edit_form #cd_first_name').css("display", "none");
-      // var l = $('#edit_form label').get(1);
-      // $(l).css("display", "none");
-      // $('#edit_form #cd_last_name').css("display", "none");
-      // var la = $('#edit_form label').get(2);
-      // $(la).css("display", "none");
-
       // populate form with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #cd_title').val(title);

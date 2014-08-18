@@ -20,7 +20,7 @@
         <td class="hiddenColumn"> <%= "#{book.id}" %> </td>    
         <td class="title"> <%= "#{book.title}" %> </td>
         <td class="author"> <% book.authors.each do |a| %> 
-          <span><%= "#{a.full_name}" %> <br></span>
+          <span><%= "#{a.full_name}" %> </span><br>
         <% end %>
         </td>
         <td class="category"> <%= "#{book.category}" %> </td>
@@ -70,7 +70,7 @@
         <%= label_tag('book[title]', "Title:") %>
         <%= text_field_tag('book[title]') %> <br>
 
-        <div id="authorWrapper">
+        <div class="authorWrapper">
           <!-- the [] in authors[] tells rails to accept an array -->
           <%= label_tag('authors[]', "Author's name:") %>
           <%= text_field_tag('authors[]') %> <br>
@@ -126,8 +126,11 @@
       <%= label_tag('book[title]', "Title:") %>
       <%= text_field_tag('book[title]') %> <br>
 
-      <%= label_tag('book[full_name]', "Author's name:") %>
-      <%= text_field_tag('book[full_name]') %> <br>
+      <div class="authorWrapper">
+        <%= label_tag('book[full_name]', "Author's name:") %>
+        <%= text_field_tag('book[full_name]') %> <br>
+      </div>
+      <button type="button" class="addAuth">Add an Author</button>
 
       <%= label_tag('book[category]', "Category:") %>
       <%= text_field_tag('book[category]') %> <br>
@@ -186,8 +189,8 @@
   // ********** add-an-author button *************
   $('.addAuth').on('click', function(e) {
     e.preventDefault();
-    $('#authorWrapper').append("<label for='authors'>Author's Name:</label>");
-    $('#authorWrapper').append("<input id='authors' name='authors[]' type='text'>");
+    $(this).before("<label for='authors'>Author's Name:</label>");
+    $(this).before("<input id='authors' name='authors[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************
@@ -231,13 +234,20 @@
 
     // *********** update row ***********
     $('#editButton').click(function () {
-      // grab info from selected row
+      // **** GRAB INFO from selected row
       var id = $('.selected').children().first().text().trim();
       console.log("id: ", id);
       var title = $('.selected .title').text().trim();
       console.log("title: ", title);
-      var author = $('.selected .author').text().trim();
-      console.log("author: ", author);
+      // iterate through authors in the table
+      var authors = [];
+      $('.selected .author span').each(function(index, element) {
+        var name = $(element).text();
+        console.log("element is ", name);
+        authors.push(name);
+      });
+      console.log("authors are ", authors);
+      // continue to select info 
       var category = $('.selected .category').text().trim();
       console.log("category: ", category);
       var comment = $('.selected .comment').text().trim();
@@ -251,13 +261,21 @@
       var owned = $('.selected .owned').data('value');
       console.log("owned: ", owned);
 
-      // update route to point to selected book's id
+      // **** UPDATE ROUTE to point to selected book's id
       $("#edit_form").attr("action", "/books/" + id)
 
-      // populate form with the selected row's info
+      // **** POPULATE FORM with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #book_title').val(title);
-      $('#edit_form #book_full_name').val(author);
+      //  populate authors: 1st clear out the wrapper with .empty
+      $('#edit_form .authorWrapper').empty();
+      for (var i = 0; i < authors.length; i++) {
+        // then create a label and input for each element in authors
+        console.log("authors[i]", authors[i]);
+        $('#edit_form .authorWrapper').append("<label for='authors'>Author's Name:</label>");
+        $('#edit_form .authorWrapper').append("<input id='authors' name='authors[]' type='text' value='" + authors[i] + "'>");
+      }
+      // continue to populate form
       $('#edit_form #book_category').val(category);
       $('#edit_form #book_comment').val(comment);
       // if/else for on_loan radio button

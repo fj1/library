@@ -25,7 +25,7 @@
           <td class="musicians"></td>
         <% else %>
           <td class="musicians"> <% cd.musicians.each do |m| %>
-            <%= "#{m.full_name}" %> <br>
+            <span><%= "#{m.full_name}" %></span> <br>
           <% end %>
           </td>
         <% end %>  
@@ -34,7 +34,7 @@
           <td class="ensembles"></td>
         <% else %>  
           <td class="ensembles"> <% cd.ensembles.each do |e| %>
-            <%= "#{e.name}" %>
+            <span><%= "#{e.name}" %></span><br>
           <% end %>
           </td>
         <% end %>
@@ -85,8 +85,11 @@
         <%= label_tag('cd[title]', "Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
-        <%= label_tag('cd[full_name]', "Musician's name:") %>
-        <%= text_field_tag('cd[full_name]') %> <br>
+        <div id="musicianWrapper">
+          <%= label_tag('cd[full_name][]', "Musician's name:") %>
+          <%= text_field_tag('cd[full_name][]') %> <br>
+        </div>
+        <button type="button" class="add">Add a Musician</button>
 
         <%= label_tag('cd[ensemble]', "Band's name:") %>
         <%= text_field_tag('cd[name]') %> <br>
@@ -199,6 +202,13 @@
     $('#cds-table').DataTable();
   });
 
+  // ********** add-a-musician button *************
+  $('.add').on('click', function(e) {
+    e.preventDefault();
+    $('#musicianWrapper').append("<label for='cd_full_name[]'>Musician's Name:</label>");
+    $('#musicianWrapper').append("<input id='cd_full_name[]' name='cd[full_name][]' type='text'>");
+  });
+
   // ********** DataTable select/delete functionality ************
 
   $(document).ready(function() {
@@ -246,6 +256,14 @@
       console.log("title:", title);
       var musicians = $('.selected .musicians').text().trim();
       console.log("musicians are ", musicians);
+      // ****** EXPERIMENT
+      // var musicians = [];
+      // var m = $('.selected .musicians').text().trim();
+      // for (var i = 0; i < m.length; i++) {
+      //   musicians.push(m);
+      // }
+      // console.log("musicians are ", musicians);
+      // ******* END EXPERIMENT
       var ensembles = $('.selected .ensembles').text().trim();
       var category = $('.selected .category').text().trim();
       var comment = $('.selected .comment').text().trim();

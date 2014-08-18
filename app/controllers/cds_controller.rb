@@ -18,11 +18,14 @@ class CdsController < ApplicationController
   def create
     cd = Cd.new(cd_params)
     cd.save!
-    # logic to check for .present on musician
-    if musician_params[:full_name].present? 
-      musician = Musician.new(musician_params)
-      musician.save!
-      CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
+    # logic to check for .any? on musician
+    # puts "NAMES: #{musician_names.inspect}"
+    if musician_names.any? 
+      musician_names.each do |name|
+        musician = Musician.new(full_name: name)
+        musician.save!
+        CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
+      end
     end
     # logic to check for .present on ensemble
     if ensemble_params[:name].present?
@@ -56,8 +59,8 @@ class CdsController < ApplicationController
       :on_loan, :listened, :is_digital, :is_owned)
   end
 
-  def musician_params
-    params.require(:cd).permit(:full_name)
+  def musician_names
+    params[:cd][:full_name]
   end
 
   def ensemble_params

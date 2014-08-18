@@ -85,13 +85,13 @@
         <%= label_tag('cd[title]', "Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
-        <div id="musicianWrapper">
+        <div class="musicianWrapper">
           <%= label_tag('cd[full_name][]', "Musician's name:") %>
           <%= text_field_tag('cd[full_name][]') %> <br>
         </div>
         <button type="button" class="addMus">Add a Musician</button>
 
-        <div id="ensembleWrapper">
+        <div class="ensembleWrapper">
           <%= label_tag('ensembles[]', "Band's name:") %>
           <%= text_field_tag('ensembles[]') %> <br>
         </div>
@@ -146,11 +146,17 @@
         <%= label_tag('cd[title]', "Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
-        <%= label_tag('cd[full_name]', "Musician's name:") %>
-        <%= text_field_tag('cd[full_name]') %> <br>
+        <div class="musicianWrapper">
+          <%= label_tag('cd[full_name][]', "Musician's name:") %>
+          <%= text_field_tag('cd[full_name][]') %> <br>
+        </div>
+        <button type="button" class="addMus">Add a Musician</button>
 
-        <%= label_tag('cd[ensemble]', "Band's name:") %>
-        <%= text_field_tag('cd[name]') %> <br>
+        <div class="ensembleWrapper">
+          <%= label_tag('ensembles[]', "Band's name:") %>
+          <%= text_field_tag('ensembles[]') %> <br>
+        </div>
+        <button type="button" class="addEns">Add a Band</button>
 
         <%= label_tag('cd[category]', "Musical category:") %>
         <%= text_field_tag('cd[category]') %> <br>
@@ -208,15 +214,18 @@
   // ********** add-a-musician button *************
   $('.addMus').on('click', function(e) {
     e.preventDefault();
-    $('#musicianWrapper').append("<label for='cd_full_name'>Musician's Name:</label>");
-    $('#musicianWrapper').append("<input id='cd_full_name' name='cd[full_name][]' type='text'>");
+    // var form = $(this).closest('form');
+    console.log('this:', this);
+    // console.log('Form:', form);
+    $(this).before("<label for='cd_full_name'>Musician's Name:</label>");
+    $(this).before("<input id='cd_full_name' name='cd[full_name][]' type='text'>");
   });
 
   // ********** add-a-ensemble button *************
   $('.addEns').on('click', function(e) {
     e.preventDefault();
-    $('#ensembleWrapper').append("<label for='ensembles'>Band's Name:</label>");
-    $('#ensembleWrapper').append("<input id='ensembles' name='ensembles[]' type='text'>");
+    $('.ensembleWrapper').append("<label for='ensembles'>Band's Name:</label>");
+    $('.ensembleWrapper').append("<input id='ensembles' name='ensembles[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************
@@ -260,36 +269,44 @@
 
     // *********** update row ***********
     $('#editButton').click(function () {
-      // grab info from selected row
+      // **** GRAB INFORMATION from selected row
       var id = $('.selected').children().first().text().trim();
       var title = $('.selected .title').text().trim();
       console.log("title:", title);
-      var musicians = $('.selected .musicians').text().trim();
+      // iterate through musicians in the table
+      var musicians = [];
+      $('.selected .musicians span').each(function(index, element) {
+        var name = $(element).text();
+        console.log("element is ", name);
+        musicians.push(name);
+      });
       console.log("musicians are ", musicians);
-      // ****** EXPERIMENT
-      // var musicians = [];
-      // var m = $('.selected .musicians').text().trim();
-      // for (var i = 0; i < m.length; i++) {
-      //   musicians.push(m);
-      // }
-      // console.log("musicians are ", musicians);
-      // ******* END EXPERIMENT
+      // iterate through ensembles in the table
       var ensembles = $('.selected .ensembles').text().trim();
       var category = $('.selected .category').text().trim();
       var comment = $('.selected .comment').text().trim();
       var loan = $('.selected .loan').data('value');
-      console.log("loan is ", loan);
       var listened = $('.selected .listened').data('value');
       var digital = $('.selected .digital').data('value');
       var owned = $('.selected .owned').data('value');
 
-      // update route to point to selected cd's id
+      // **** UPDATE ROUTE to point to selected cd's id
       $("#edit_form").attr("action", "/cds/" + id)
       
-      // populate form with the selected row's info
+      // **** POPULATE FORM with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #cd_title').val(title);
-      $('#edit_form #cd_full_name').val(musicians);
+
+      // populate musicians: 1st clear out the wrapper with .empty
+      $('#edit_form .musicianWrapper').empty();
+      for (var i = 0; i < musicians.length; i++) {
+        // then create a label and input for each element in musicians
+        console.log("musicians[i]", musicians[i]);
+        $('#edit_form .musicianWrapper').append("<label for='cd_full_name'>Musician's Name:</label>");
+        $('#edit_form .musicianWrapper').append("<input id='cd_full_name' name='cd[full_name][]' type='text' value='" + musicians[i] + "'>");
+      }
+
+
       $('#edit_form #cd_name').val(ensembles);
       $('#edit_form #cd_category').val(category);
       $('#edit_form #cd_comment').val(comment);

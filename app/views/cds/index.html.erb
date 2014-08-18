@@ -224,8 +224,8 @@
   // ********** add-a-ensemble button *************
   $('.addEns').on('click', function(e) {
     e.preventDefault();
-    $('.ensembleWrapper').append("<label for='ensembles'>Band's Name:</label>");
-    $('.ensembleWrapper').append("<input id='ensembles' name='ensembles[]' type='text'>");
+    $(this).before("<label for='ensembles'>Band's Name:</label>");
+    $(this).before("<input id='ensembles' name='ensembles[]' type='text'>");
   });
 
   // ********** DataTable select/delete functionality ************
@@ -282,7 +282,14 @@
       });
       console.log("musicians are ", musicians);
       // iterate through ensembles in the table
-      var ensembles = $('.selected .ensembles').text().trim();
+      var ensembles = [];
+      $('.selected .ensembles span').each(function(index, element) {
+        var name = $(element).text();
+        console.log("element is ", name);
+        ensembles.push(name);
+      });
+      console.log("ensembles are ", ensembles);
+      // rest of table      
       var category = $('.selected .category').text().trim();
       var comment = $('.selected .comment').text().trim();
       var loan = $('.selected .loan').data('value');
@@ -296,7 +303,6 @@
       // **** POPULATE FORM with the selected row's info
       $('#edit_form #hiddenId').val(id);
       $('#edit_form #cd_title').val(title);
-
       // populate musicians: 1st clear out the wrapper with .empty
       $('#edit_form .musicianWrapper').empty();
       for (var i = 0; i < musicians.length; i++) {
@@ -307,6 +313,19 @@
       }
 
 
+
+      // populate ensembles: 1st clear out the wrapper with .empty
+      $('#edit_form .ensembleWrapper').empty();
+      for (var i = 0; i < ensembles.length; i++) {
+        // then create a label and input for each element in ensembles
+        console.log("ensembles[i]", ensembles[i]);
+        $('#edit_form .ensembleWrapper').append("<label for='cd_full_name'>Band's Name:</label>");
+        $('#edit_form .ensembleWrapper').append("<input id='cd_full_name' name='cd[full_name][]' type='text' value='" + ensembles[i] + "'>");
+      }
+
+
+
+      // continue to populate rest of form 
       $('#edit_form #cd_name').val(ensembles);
       $('#edit_form #cd_category').val(category);
       $('#edit_form #cd_comment').val(comment);

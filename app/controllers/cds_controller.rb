@@ -34,12 +34,12 @@ class CdsController < ApplicationController
   end
 
   def edit
-    @cd = Cd.find(cd_params[:id])
+    @cd = Cd.find(params[:id])
   end
 
   def update
     @cd = Cd.find(params[:id])
-    @cd.update(params.require(:cd).permit(:id))
+    @cd.update(cd_params)
     redirect_to '/cds'
   end
 

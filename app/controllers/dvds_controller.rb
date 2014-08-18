@@ -25,12 +25,12 @@ class DvdsController < ApplicationController
   end
 
   def edit
-    @dvd = Dvd.find(dvd_params[:id])
+    @dvd = Dvd.find(params[:id])
   end
 
   def update
     @dvd = Dvd.find(params[:id])
-    @dvd.update(params.require(:dvd).permit(:id))
+    @dvd.update(dvd_params)
     redirect_to '/dvds'
   end
 

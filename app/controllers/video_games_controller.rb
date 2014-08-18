@@ -22,12 +22,12 @@ class VideoGamesController < ApplicationController
   end
 
   def edit
-    @vg = VideoGame.find(vg_params[:id])
+    @vg = VideoGame.find(params[:id])
   end
 
   def update
     @vg = VideoGame.find(params[:id])
-    @vg.update(params.require(:vg).permit(:id))
+    @vg.update(vg_params)
     redirect_to '/video_games'
   end
 

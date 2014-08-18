@@ -118,8 +118,7 @@
 
     <%= form_tag("/books", method: "put", :id => "edit_form") do %>
       
-      <!-- TO DO: add type="hidden" -->
-      <input id="hiddenId" name="id" value="id">
+      <input type="hidden" id="hiddenId" name="id" value="id">
 
       <%= label_tag('book[title]', "Title:") %>
       <%= text_field_tag('book[title]') %> <br>

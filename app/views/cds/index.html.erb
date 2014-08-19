@@ -42,26 +42,42 @@
         <td class="comment"> <%= "#{cd.comment}" %> </td>
         <!-- on_loan if/else -->  
         <td class="loan" data-value="<%= cd.on_loan %>">
-          <% if cd.on_loan == true %> <img value="true" class="check" src="/assets/green-check.png"/>
-          <% else %> <img value="false" class="check" src="/assets/red-check.png"/>
+          <% if cd.on_loan == true %> 
+            <p style="display:none">a</p>
+            <img value="true" class="check" src="/assets/green-check.png"/>
+          <% else %> 
+            <p style="display:none">b</p>
+            <img value="false" class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- listened if/else -->  
         <td class="listened" data-value="<%= cd.listened %>"> 
-          <% if cd.listened == true %> <img class="check" src="/assets/green-check.png"/>
-          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% if cd.listened == true %> 
+            <p style="display:none">a</p>
+            <img class="check" src="/assets/green-check.png"/>
+          <% else %> 
+            <p style="display:none">b</p>
+            <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- is_digital if/else -->
         <td class="digital" data-value="<%= cd.is_digital %>"> 
-          <% if cd.is_digital == true %> <img class="check" src="/assets/green-check.png"/>
-          <% else %> <img class="check" src="/assets/red-check.png"/>
+          <% if cd.is_digital == true %> 
+            <p style="display:none">a</p>
+            <img class="check" src="/assets/green-check.png"/>
+          <% else %> 
+            <p style="display:none">b</p>
+            <img class="check" src="/assets/red-check.png"/>
           <% end %> 
         </td>
         <!-- is_owned if/else -->
         <td class="owned" data-value="<%= cd.is_owned %>"> 
-          <% if cd.is_owned == true %> <img class="check" src="/assets/green-check.png"/>
-          <% else %> <img class="check gift" src="/assets/gift.png"/>
+          <% if cd.is_owned == true %> 
+            <p style="display:none">a</p>
+            <img class="check" src="/assets/green-check.png"/>
+          <% else %> 
+            <p style="display:none">b</p>
+            <img class="check gift" src="/assets/gift.png"/>
           <% end %> 
         </td>
       </tr>
@@ -232,7 +248,7 @@
     <!-- ***** 3RD TAB: DELETE ITEM ***** -->
     <div class="content" id="panel2-3">
       <h3>Select the row you would like to delete.</h3>
-      <h5>Careful! There's no 'undo'...</h5>
+      <h5>Careful! There's no undo...</h5>
       <div class="buttonWrapper">
         <button id="deleteButton">Delete selected row</button>
       </div>     

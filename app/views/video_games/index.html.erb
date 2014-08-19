@@ -66,7 +66,7 @@
         <%= label_tag('video_game[title]', "Title:") %>
         <%= text_field_tag('video_game[title]') %> <br>
 
-        <%= label_tag('video_game[console]', "What console is this game for?") %>
+        <%= label_tag('video_game[console]', "Console:") %>
         <%= text_field_tag('video_game[console]') %> <br>
 
         <%= label_tag('video_game[category]', "Category:") %>
@@ -75,33 +75,43 @@
         <%= label_tag('video_game[comment]', "Comment:") %>
         <%= text_field_tag('video_game[comment]') %> <br>
 
-        Is this video game currently on loan?
-        <%= radio_button_tag('video_game[on_loan]', true) %>
-        <%= label_tag(:on_loan_true, "Yes") %>
-        <%= radio_button_tag('video_game[on_loan]', false, true) %>
-        <%= label_tag(:on_loan_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Is this video game currently on loan?</span>
+          <%= radio_button_tag('video_game[on_loan]', true) %>
+          <%= label_tag(:on_loan_true, "Yes") %>
+          <%= radio_button_tag('video_game[on_loan]', false, true) %>
+          <%= label_tag(:on_loan_false, "No") %> <br>
+        </div>
 
-        Have I played this video game already?
-        <%= radio_button_tag('video_game[played]', true) %>
-        <%= label_tag(:played_true, "Yes") %>
-        <%= radio_button_tag('video_game[played]', false, true) %>
-        <%= label_tag(:played_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Have I played this video game already?</span>
+          <%= radio_button_tag('video_game[played]', true) %>
+          <%= label_tag(:played_true, "Yes") %>
+          <%= radio_button_tag('video_game[played]', false, true) %>
+          <%= label_tag(:played_false, "No") %> <br>
+        </div>
 
-        Is this video game a digital copy?
-        <%= radio_button_tag('video_game[is_digital]', true) %>
-        <%= label_tag(:is_digital_true, "Yes") %>
-        <%= radio_button_tag('video_game[is_digital]', false, true) %>
-        <%= label_tag(:is_digital_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Is this video game a digital copy?</span>
+          <%= radio_button_tag('video_game[is_digital]', true) %>
+          <%= label_tag(:is_digital_true, "Yes") %>
+          <%= radio_button_tag('video_game[is_digital]', false, true) %>
+          <%= label_tag(:is_digital_false, "No") %> <br>
+        </div>
 
-        Do I already own a copy of this video game?
-        <%= radio_button_tag('video_game[is_owned]', true) %>
-        <%= label_tag(:is_owned_true, "Yes") %>
-        <%= radio_button_tag('video_game[is_owned]', false, true) %>
-        <%= label_tag(:is_owned_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Do I already own a copy of this video game?</span>
+          <%= radio_button_tag('video_game[is_owned]', true) %>
+          <%= label_tag(:is_owned_true, "Yes") %>
+          <%= radio_button_tag('video_game[is_owned]', false, true) %>
+          <%= label_tag(:is_owned_false, "No") %> <br>
+        </div>
 
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-        <%= submit_tag("Submit New Item") %>
+        <div class="buttonWrapper">
+          <button type="submit">Submit New Video Game</button>
+        </div>
       <% end %>
     </div> <!-- end id="panel2-1" -->
 
@@ -109,7 +119,10 @@
     <div class="content" id="panel2-2">
       <h3>Select the row you would like to edit.</h3>
       <h5>Then click the button:</h5>
-      <button id="editButton">Edit selected row</button>
+      
+      <div class="buttonWrapper">
+        <button id="editButton">Edit selected row</button>
+      </div>
      
      <%= form_tag("/video_games", method: "put", :id => "edit_form") do %>
 
@@ -118,7 +131,7 @@
        <%= label_tag('video_game[title]', "Title:") %>
        <%= text_field_tag('video_game[title]') %> <br>
 
-       <%= label_tag('video_game[console]', "What console is this game for?") %>
+       <%= label_tag('video_game[console]', "Console:") %>
        <%= text_field_tag('video_game[console]') %> <br>
 
        <%= label_tag('video_game[category]', "Category:") %>
@@ -127,33 +140,43 @@
        <%= label_tag('video_game[comment]', "Comment:") %>
        <%= text_field_tag('video_game[comment]') %> <br>
 
-       Is this video game currently on loan?
-       <%= radio_button_tag('video_game[on_loan]', true) %>
-       <%= label_tag(:on_loan_true, "Yes") %>
-       <%= radio_button_tag('video_game[on_loan]', false, true) %>
-       <%= label_tag(:on_loan_false, "No") %> <br>
+       <div class="radioWrapper">
+        <span>Is this video game currently on loan?</span>
+        <%= radio_button_tag('video_game[on_loan]', true) %>
+        <%= label_tag(:on_loan_true, "Yes") %>
+        <%= radio_button_tag('video_game[on_loan]', false, true) %>
+        <%= label_tag(:on_loan_false, "No") %> <br>
+       </div>
 
-       Have I played this video game already?
-       <%= radio_button_tag('video_game[played]', true) %>
-       <%= label_tag(:played_true, "Yes") %>
-       <%= radio_button_tag('video_game[played]', false, true) %>
-       <%= label_tag(:played_false, "No") %> <br>
+       <div class="radioWrapper">
+        <span>Have I played this video game already?</span>
+        <%= radio_button_tag('video_game[played]', true) %>
+        <%= label_tag(:played_true, "Yes") %>
+        <%= radio_button_tag('video_game[played]', false, true) %>
+        <%= label_tag(:played_false, "No") %> <br>
+       </div>
 
-       Is this video game a digital copy?
-       <%= radio_button_tag('video_game[is_digital]', true) %>
-       <%= label_tag(:is_digital_true, "Yes") %>
-       <%= radio_button_tag('video_game[is_digital]', false, true) %>
-       <%= label_tag(:is_digital_false, "No") %> <br>
+       <div class="radioWrapper">
+        <span>Is this video game a digital copy?</span>
+        <%= radio_button_tag('video_game[is_digital]', true) %>
+        <%= label_tag(:is_digital_true, "Yes") %>
+        <%= radio_button_tag('video_game[is_digital]', false, true) %>
+        <%= label_tag(:is_digital_false, "No") %> <br>
+       </div>
 
-       Do I already own a copy of this video game?
-       <%= radio_button_tag('video_game[is_owned]', true) %>
-       <%= label_tag(:is_owned_true, "Yes") %>
-       <%= radio_button_tag('video_game[is_owned]', false, true) %>
-       <%= label_tag(:is_owned_false, "No") %> <br>
+       <div class="radioWrapper">
+        <span>Do I already own a copy of this video game?</span>
+        <%= radio_button_tag('video_game[is_owned]', true) %>
+        <%= label_tag(:is_owned_true, "Yes") %>
+        <%= radio_button_tag('video_game[is_owned]', false, true) %>
+        <%= label_tag(:is_owned_false, "No") %> <br>
+       </div>
 
        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-       <%= submit_tag("Submit New Item") %>
+        <div class="buttonWrapper">
+          <button type="submit">Submit Edited Video Game</button>
+        </div>
      <% end %>
     </div> <!-- end id="panel2-2" -->
 
@@ -161,7 +184,9 @@
     <div class="content" id="panel2-3">
       <h3>Select the row you would like to delete.</h3>
       <h5>Careful! There's no 'undo'...</h5>
-      <button id="deleteButton">Delete selected row</button>
+      <div class="buttonWrapper">
+        <button id="deleteButton">Delete selected row</button>
+      </div> 
     </div> <!-- end id="panel2-3" -->
   </div> <!-- end class="tabs-content" -->
 </div> <!-- end id="tabsWrapper" -->    

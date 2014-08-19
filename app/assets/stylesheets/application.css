@@ -59,6 +59,17 @@ button:hover, .button:hover, .button.dropdown:hover, #editButton:hover {
 
 /* TABLE elements */
 
+select {
+  width: 7em;
+}
+
+#cds-table_filter input,
+#video-games-table_filter input,
+#books-table_filter input,
+#dvds-table_filter input {
+  width: 24em;
+}
+
 .check {
 height: 1em;
 width: auto;
@@ -90,34 +101,24 @@ display: none;
 }
 
 table, .tabs-content {
-  border: 1px solid #c58358;
+  border-top: 1px solid #c58358;
+  border-bottom: 1px solid #c58358;
 }
 
-/*li.tab-title a {
-  background-color: #c58358;
-}
-
-li.tab-title:active a {
-  background-color: #d09b79;
-}*/
-
-
-/*li.tab-title > .a {
+h3, h5 {
   font-family: 'Raleway', sans-serif;
-}*/
-
-.tabs-content button {
   text-align: center;
 }
 
-/*label {
-  float: left;
+.buttonWrapper {
+  display: block;
+  text-align: center;
 }
 
-input {
-  float: right;
-  width: 75%;
-}*/
+.radioWrapper label {
+  width: auto;
+  float: none;
+}
 
 /*************** customized css from http://datatables.net/manual/styling/theme-creator ***************/
 

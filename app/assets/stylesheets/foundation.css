@@ -2911,15 +2911,15 @@ blockquote p {
     float: left; }
     .tabs dd > a, .tabs .tab-title > a {
       display: block;
-      background: #efefef;
+      background: #c58358;
       color: #222222;
       padding: 1rem 2rem;
-      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      font-family: 'Raleway', sans-serif;
       font-size: 1rem; }
       .tabs dd > a:hover, .tabs .tab-title > a:hover {
-        background: #e1e1e1; }
+        background: #d09b79; }
     .tabs dd.active a, .tabs .tab-title.active a {
-      background: white;
+      background: #D7AA8D;
       color: #222222; }
   .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
     border-bottom-left-radius: 3px;
@@ -4522,10 +4522,18 @@ form .row textarea.columns {
 
 /* Label Styles */
 label {
-  font-size: 0.875rem;
+  /* I ADDED THE FLOAT: LEFT; */
+  float: left;
+  /* I ADDED THE WIDTH */
+  width: 20%;
+  /* I CHANGED THE FONT SIZE FROM 0.875REM */
+  font-size: 1rem;
+  /* I ADDED THE TEXT-ALIGN:CENTER; */
+  text-align: center;
   color: #4d4d4d;
   cursor: pointer;
-  display: block;
+  /* I CHANGED THIS from display:block */
+  display: inline-block;
   font-weight: normal;
   line-height: 1.5;
   margin-bottom: 0;
@@ -4535,7 +4543,8 @@ label {
     text-align: right; }
   label.inline {
     margin: 0 0 1rem 0;
-    padding: 0.5625rem 0; }
+    padding: 0.5625rem 0; 
+    }
   label small {
     text-transform: capitalize;
     color: #676767; }
@@ -4642,12 +4651,16 @@ textarea {
   border: 1px solid #cccccc;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.75);
-  display: block;
+  /* I CHANGED THIS FROM display:block */
+  display: inline-block;
+  /* I ADDED float:left */
+  /*float: left;*/
   font-size: 0.875rem;
   margin: 0 0 1rem 0;
   padding: 0.5rem;
   height: 2.3125rem;
-  width: 100%;
+  /* I CHANGED THIS FROM 100% */
+  width: 80%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -4666,8 +4679,8 @@ textarea {
   input[type="time"]:focus,
   input[type="url"]:focus,
   textarea:focus {
-    box-shadow: 0 0 5px #999999;
-    border-color: #999999; }
+    box-shadow: 0 0 5px #c58358;
+    border-color: #c58358; }
   input[type="text"]:focus,
   input[type="password"]:focus,
   input[type="date"]:focus,
@@ -4682,8 +4695,8 @@ textarea {
   input[type="time"]:focus,
   input[type="url"]:focus,
   textarea:focus {
-    background: #fafafa;
-    border-color: #999999;
+    background: ##c58358;
+    border-color: ##c58358;
     outline: none; }
   input[type="text"]:disabled,
   input[type="password"]:disabled,

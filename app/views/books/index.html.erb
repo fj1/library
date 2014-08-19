@@ -75,7 +75,10 @@
           <%= label_tag('authors[]', "Author's name:") %>
           <%= text_field_tag('authors[]') %> <br>
         </div>
-        <button type="button" class="addAuth">Add an Author</button>
+
+        <div class="buttonWrapper">
+          <button type="button" class="addAuth">Add an Author</button>
+        </div>
 
         <%= label_tag('book[category]', "Category:") %>
         <%= text_field_tag('book[category]') %> <br>
@@ -83,41 +86,54 @@
         <%= label_tag('book[comment]', "Comment:") %>
         <%= text_field_tag('book[comment]') %> <br>
 
-        Is this book currently on loan?
-        <%= radio_button_tag('book[on_loan]', true) %>
-        <%= label_tag(:on_loan_true, "Yes") %>
-        <%= radio_button_tag('book[on_loan]', false, true) %>
-        <%= label_tag(:on_loan_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Is this book currently on loan?</span>
+          <%= radio_button_tag('book[on_loan]', true) %>
+          <%= label_tag(:on_loan_true, "Yes") %>
+          <%= radio_button_tag('book[on_loan]', false, true) %>
+          <%= label_tag(:on_loan_false, "No") %> <br>
+        </div>
 
-        Have I read this book already?
-        <%= radio_button_tag('book[read]', true) %>
-        <%= label_tag(:read_true, "Yes") %>
-        <%= radio_button_tag('book[read]', false, true) %>
-        <%= label_tag(:read_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Have I read this book already?</span>
+          <%= radio_button_tag('book[read]', true) %>
+          <%= label_tag(:read_true, "Yes") %>
+          <%= radio_button_tag('book[read]', false, true) %>
+          <%= label_tag(:read_false, "No") %> <br>
+        </div>
 
-        Is this book a digital copy?
-        <%= radio_button_tag('book[is_digital]', true) %>
-        <%= label_tag(:is_digital_true, "Yes") %>
-        <%= radio_button_tag('book[is_digital]', false, true) %>
-        <%= label_tag(:is_digital_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Is this book a digital copy?</span>
+          <%= radio_button_tag('book[is_digital]', true) %>
+          <%= label_tag(:is_digital_true, "Yes") %>
+          <%= radio_button_tag('book[is_digital]', false, true) %>
+          <%= label_tag(:is_digital_false, "No") %> <br>
+        </div>
 
-        Do I already own a copy of this book?
-        <%= radio_button_tag('book[is_owned]', true) %>
-        <%= label_tag(:is_owned_true, "Yes") %>
-        <%= radio_button_tag('book[is_owned]', false, true) %>
-        <%= label_tag(:is_owned_false, "No") %> <br>
+        <div class="radioWrapper">
+          <span>Do I already own a copy of this book?</span>
+          <%= radio_button_tag('book[is_owned]', true) %>
+          <%= label_tag(:is_owned_true, "Yes") %>
+          <%= radio_button_tag('book[is_owned]', false, true) %>
+          <%= label_tag(:is_owned_false, "No") %> <br>
+        </div>
 
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-      <%= submit_tag("Submit New Item") %>
+      <div class="buttonWrapper">
+        <button type="submit">Submit New Book</button>
+      </div>
     <% end %>  
   </div> <!-- end id="panel2-1" -->
 
   <!-- ***** 2ND TAB: EDIT ITEM ***** -->
   <div class="content" id="panel2-2">
-    <h3>Select the row you would like to edit.</h3>
+    <h3>Click on the item you would like to edit.</h3>
     <h5>Then click the button:</h5>
-    <button id="editButton">Edit selected row</button>
+
+    <div class="buttonWrapper">
+      <button id="editButton">Edit selected row</button>
+    </div>
 
     <%= form_tag("/books", method: "put", :id => "edit_form") do %>
       
@@ -130,7 +146,10 @@
         <%= label_tag('book[full_name]', "Author's name:") %>
         <%= text_field_tag('book[full_name]') %> <br>
       </div>
-      <button type="button" class="addAuth">Add an Author</button>
+
+      <div class="buttonWrapper">
+        <button type="button" class="addAuth">Add an Author</button>
+      </div>
 
       <%= label_tag('book[category]', "Category:") %>
       <%= text_field_tag('book[category]') %> <br>
@@ -138,33 +157,43 @@
       <%= label_tag('book[comment]', "Comment:") %>
       <%= text_field_tag('book[comment]') %> <br>
 
-      Is this book currently on loan?
-      <%= radio_button_tag('book[on_loan]', true) %>
-      <%= label_tag(:on_loan_true, "Yes") %>
-      <%= radio_button_tag('book[on_loan]', false, true) %>
-      <%= label_tag(:on_loan_false, "No") %> <br>
+      <div class="radioWrapper">
+        <span>Is this book currently on loan?</span>
+        <%= radio_button_tag('book[on_loan]', true) %>
+        <%= label_tag(:on_loan_true, "Yes") %>
+        <%= radio_button_tag('book[on_loan]', false, true) %>
+        <%= label_tag(:on_loan_false, "No") %> <br>
+      </div>
 
-      Have I read this book already?
-      <%= radio_button_tag('book[read]', true) %>
-      <%= label_tag(:read_true, "Yes") %>
-      <%= radio_button_tag('book[read]', false, true) %>
-      <%= label_tag(:read_false, "No") %> <br>
+      <div class="radioWrapper">
+        <span>Have I read this book already?</span>
+        <%= radio_button_tag('book[read]', true) %>
+        <%= label_tag(:read_true, "Yes") %>
+        <%= radio_button_tag('book[read]', false, true) %>
+        <%= label_tag(:read_false, "No") %> <br>
+      </div>
 
-      Is this book a digital copy?
-      <%= radio_button_tag('book[is_digital]', true) %>
-      <%= label_tag(:is_digital_true, "Yes") %>
-      <%= radio_button_tag('book[is_digital]', false, true) %>
-      <%= label_tag(:is_digital_false, "No") %> <br>
+      <div class="radioWrapper">
+        <span>Is this book a digital copy?</span>
+        <%= radio_button_tag('book[is_digital]', true) %>
+        <%= label_tag(:is_digital_true, "Yes") %>
+        <%= radio_button_tag('book[is_digital]', false, true) %>
+        <%= label_tag(:is_digital_false, "No") %> <br>
+      </div>
 
-      Do I already own a copy of this book?
-      <%= radio_button_tag('book[is_owned]', true) %>
-      <%= label_tag(:is_owned_true, "Yes") %>
-      <%= radio_button_tag('book[is_owned]', false, true) %>
-      <%= label_tag(:is_owned_false, "No") %> <br>
+      <div class="radioWrapper">
+        <span>Do I already own a copy of this book?</span>
+        <%= radio_button_tag('book[is_owned]', true) %>
+        <%= label_tag(:is_owned_true, "Yes") %>
+        <%= radio_button_tag('book[is_owned]', false, true) %>
+        <%= label_tag(:is_owned_false, "No") %> <br>
+      </div>
 
       <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-      <%= submit_tag("Submit Edited Item") %>
+      <div class="buttonWrapper">
+        <button type="submit">Submit Edited Book</button>
+      </div>
      <% end %>
     </div> <!-- end id="panel2-2" -->
 
@@ -172,7 +201,9 @@
     <div class="content" id="panel2-3">
       <h3>Select the row you would like to delete.</h3>
       <h5>Careful! There's no 'undo'...</h5>
-      <button id="deleteButton">Delete selected row</button>
+      <div class="buttonWrapper">
+        <button id="deleteButton">Delete selected row</button>
+      </div>
     </div> <!-- end id="panel2-3" -->
   </div> <!-- end class="tabs-content" -->
 </div> <!-- end id="tabsWrapper" -->

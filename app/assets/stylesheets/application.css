@@ -20,7 +20,7 @@ body {
 }
 
 .navbar {
-  height: 175px;
+  height: 185px;
   padding-top: 10px;
 }
 
@@ -50,6 +50,7 @@ button:hover, .button:hover, .button.dropdown:hover, #editButton:hover {
   height: 150px;
   width: auto;
   border-radius: 100%;
+  border: 1px solid #c58358;
 }
 
 .button.dropdown {
@@ -88,13 +89,26 @@ display: none;
   margin-left: 18%;
 }
 
+table, .tabs-content {
+  border: 1px solid #c58358;
+}
+
+/*li.tab-title a {
+  background-color: #c58358;
+}
+
+li.tab-title:active a {
+  background-color: #d09b79;
+}*/
+
+
 /*li.tab-title > .a {
   font-family: 'Raleway', sans-serif;
 }*/
 
-/*.content {
+.tabs-content button {
   text-align: center;
-}*/
+}
 
 /*label {
   float: left;

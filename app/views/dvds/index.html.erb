@@ -106,9 +106,12 @@
       <%= radio_button_tag('dvd[is_owned]', false, true) %>
       <%= label_tag(:is_owned_false, "No") %> <br>
 
-     <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
 
-     <%= submit_tag("Submit New Item") %>
+      <!-- <div class="buttonDiv"> -->
+        <button type="submit">Submit New DVD</button>
+      <!-- </div> -->
+
      <% end %>
     </div> <!-- end id="panel2-1" -->
 
@@ -236,9 +239,6 @@
       console.log("id: ", id);
       var title = $('.selected .title').text().trim();
       console.log("title:", title);
-      // var actor = $('.selected .actor').text().trim();
-      // console.log("actors are ", actor);
-
       // iterate through musicians in the table
       var actors = [];
       $('.selected .actors span').each(function(index, element) {
@@ -247,12 +247,6 @@
         actors.push(name);
       });
       console.log("actors are ", actors);
-
-
-
-
-
-
       // continue to grab info
       var category = $('.selected .category').text().trim();
       console.log("category: ", category);
@@ -275,7 +269,6 @@
       $('#edit_form #dvd_title').val(title);
       // $('#edit_form #dvd_full_name').val(actor);
 
-
       // populate actors: 1st clear out the wrapper with .empty
       $('#edit_form .actorWrapper').empty();
       for (var i = 0; i < actors.length; i++) {
@@ -284,9 +277,6 @@
         $('#edit_form .actorWrapper').append("<label for='actors'>Actor's Name:</label>");
         $('#edit_form .actorWrapper').append("<input id='actors' name='actors[]' type='text' value='" + actors[i] + "'>");
       }
-
-
-
       $('#edit_form #dvd_category').val(category);
       $('#edit_form #dvd_comment').val(comment);
       // if/else for on_loan radio button

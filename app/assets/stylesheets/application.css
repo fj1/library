@@ -105,6 +105,10 @@ table, .tabs-content {
   border-bottom: 1px solid #c58358;
 }
 
+.tabs-content p {
+  text-align: center;
+}
+
 h3, h5 {
   font-family: 'Raleway', sans-serif;
   text-align: center;

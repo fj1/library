@@ -98,7 +98,9 @@
     <div class="content active" id="panel2-1">
       <%= form_tag("/cds", method: "post", :id => "create_form") do %>
         
-        <%= label_tag('cd[title]', "Title:") %>
+        <p>The fields marked with an * are required.</p>
+
+        <%= label_tag('cd[title]', "* Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
         <div class="musicianWrapper">
@@ -119,14 +121,14 @@
           <button type="button" class="addEns">Add another Band</button>
         </div>
 
-        <%= label_tag('cd[category]', "Musical category:") %>
+        <%= label_tag('cd[category]', "* Category:") %>
         <%= text_field_tag('cd[category]') %> <br>
 
-        <%= label_tag('cd[comment]', "Comments:") %>
+        <%= label_tag('cd[comment]', "* Comments:") %>
         <%= text_field_tag('cd[comment]') %> <br>
 
         <div class="radioWrapper">
-          <span>Is this CD currently on loan?</span>
+          <span>* Is this CD currently on loan?</span>
           <%= radio_button_tag('cd[on_loan]', true) %>
           <%= label_tag(:on_loan_true, "Yes") %>
           <%= radio_button_tag('cd[on_loan]', false, true) %>
@@ -134,7 +136,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Have I listened to this CD already?</span>
+          <span>* Have I listened to this CD already?</span>
           <%= radio_button_tag('cd[listened]', true) %>
           <%= label_tag(:listened_true, "Yes") %>
           <%= radio_button_tag('cd[listened]', false, true) %>
@@ -142,7 +144,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Is this CD a digital copy?</span>
+          <span>* Is this CD a digital copy?</span>
           <%= radio_button_tag('cd[is_digital]', true) %>
           <%= label_tag(:is_digital_true, "Yes") %>
           <%= radio_button_tag('cd[is_digital]', false, true) %>
@@ -150,7 +152,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Do I already own a copy of this CD?</span>
+          <span>* Do I already own a copy of this CD?</span>
           <%= radio_button_tag('cd[is_owned]', true) %>
           <%= label_tag(:is_owned_true, "Yes") %>
           <%= radio_button_tag('cd[is_owned]', false, true) %>
@@ -176,9 +178,11 @@
         
       <%= form_tag("/cds", method: "put", :id => "edit_form") do %>
 
+        <p>The fields marked with an * are required.</p>
+
         <input type="hidden" id="hiddenId" name="id" value="id">
 
-        <%= label_tag('cd[title]', "Title:") %>
+        <%= label_tag('cd[title]', "* Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
         <div class="musicianWrapper">
@@ -199,14 +203,14 @@
           <button type="button" class="addEns">Add another Band</button>
         </div>
 
-        <%= label_tag('cd[category]', "Musical category:") %>
+        <%= label_tag('cd[category]', "* Category:") %>
         <%= text_field_tag('cd[category]') %> <br>
 
-        <%= label_tag('cd[comment]', "Comments:") %>
+        <%= label_tag('cd[comment]', "* Comments:") %>
         <%= text_field_tag('cd[comment]') %> 
 
         <div class="radioWrapper">
-          <span>Is this CD currently on loan?</span>
+          <span>* Is this CD currently on loan?</span>
           <%= radio_button_tag('cd[on_loan]', true) %>
           <%= label_tag(:on_loan_true, "Yes") %>
           <%= radio_button_tag('cd[on_loan]', false, true) %>
@@ -214,7 +218,7 @@
         </div>
 
         <div class="radioWrapper">
-        <span>Have I listened to this CD already?</span>
+        <span>* Have I listened to this CD already?</span>
           <%= radio_button_tag('cd[listened]', true) %>
           <%= label_tag(:listened_true, "Yes") %>
           <%= radio_button_tag('cd[listened]', false, true) %>
@@ -222,7 +226,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Is this CD a digital copy?</span>
+          <span>* Is this CD a digital copy?</span>
           <%= radio_button_tag('cd[is_digital]', true) %>
           <%= label_tag(:is_digital_true, "Yes") %>
           <%= radio_button_tag('cd[is_digital]', false, true) %>
@@ -230,7 +234,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Do I already own a copy of this CD?</span>
+          <span>* Do I already own a copy of this CD?</span>
           <%= radio_button_tag('cd[is_owned]', true) %>
           <%= label_tag(:is_owned_true, "Yes") %>
           <%= radio_button_tag('cd[is_owned]', false, true) %>

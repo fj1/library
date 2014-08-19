@@ -82,12 +82,14 @@
     <!-- ***** 1ST TAB: CREATE NEW ITEM ***** -->
     <div class="content active" id="panel2-1">
      <%= form_tag("/dvds", method: "post", :id => "create_form") do %>
+
+     <p>The fields marked with an * are required.</p>
        
-      <%= label_tag('dvd[title]', "Title:") %>
+      <%= label_tag('dvd[title]', "* Title:") %>
       <%= text_field_tag('dvd[title]') %> <br>
 
       <div class="actorWrapper">
-        <%= label_tag('actors[]', "Actor's name:") %>
+        <%= label_tag('actors[]', "* Actor's name:") %>
         <%= text_field_tag('actors[]') %> <br>
       </div>
 
@@ -95,14 +97,14 @@
         <button type="button" class="addActor">Add an Actor</button>
       </div>
 
-      <%= label_tag('dvd[category]', "Category:") %>
+      <%= label_tag('dvd[category]', "* Category:") %>
       <%= text_field_tag('dvd[category]') %> <br>
 
-      <%= label_tag('dvd[comment]', "Comment:") %>
+      <%= label_tag('dvd[comment]', "* Comment:") %>
       <%= text_field_tag('dvd[comment]') %> <br>
 
       <div class="radioWrapper">
-        <span>Is this DVD currently on loan?</span>
+        <span>* Is this DVD currently on loan?</span>
         <%= radio_button_tag('dvd[on_loan]', true) %>
         <%= label_tag(:on_loan_true, "Yes") %>
         <%= radio_button_tag('dvd[on_loan]', false, true) %>
@@ -110,7 +112,7 @@
       </div>
 
       <div class="radioWrapper">
-        <span>Have I watched this DVD already?</span>
+        <span>* Have I watched this DVD already?</span>
         <%= radio_button_tag('dvd[viewed]', true) %>
         <%= label_tag(:viewed_true, "Yes") %>
         <%= radio_button_tag('dvd[viewed]', false, true) %>
@@ -118,7 +120,7 @@
       </div>
 
       <div class="radioWrapper">
-        <span>Is this DVD a digital copy?</span>
+        <span>* Is this DVD a digital copy?</span>
         <%= radio_button_tag('dvd[is_digital]', true) %>
         <%= label_tag(:is_digital_true, "Yes") %>
         <%= radio_button_tag('dvd[is_digital]', false, true) %>
@@ -126,7 +128,7 @@
       </div>
 
       <div class="radioWrapper">
-        <span>Do I already own a copy of this DVD?</span>
+        <span>* Do I already own a copy of this DVD?</span>
         <%= radio_button_tag('dvd[is_owned]', true) %>
         <%= label_tag(:is_owned_true, "Yes") %>
         <%= radio_button_tag('dvd[is_owned]', false, true) %>
@@ -151,15 +153,17 @@
         <button id="editButton">Edit selected row</button>
       </div>
 
+      <p>The fields marked with an * are required.</p>
+
       <%= form_tag("/dvds", method: "put", :id => "edit_form") do %>
 
         <input type="hidden" id="hiddenId" name="id" value="id">
         
-        <%= label_tag('dvd[title]', "Title:") %>
+        <%= label_tag('dvd[title]', "* Title:") %>
         <%= text_field_tag('dvd[title]') %> <br>
 
         <div class="actorWrapper">
-          <%= label_tag('actors[]', "Actor's name:") %>
+          <%= label_tag('actors[]', "* Actor's name:") %>
           <%= text_field_tag('actors[]') %> <br>
         </div>
 
@@ -167,14 +171,14 @@
           <button type="button" class="addActor">Add an Actor</button>
         </div>
 
-        <%= label_tag('dvd[category]', "Category:") %>
+        <%= label_tag('dvd[category]', "* Category:") %>
         <%= text_field_tag('dvd[category]') %> <br>
 
-        <%= label_tag('dvd[comment]', "Comment:") %>
+        <%= label_tag('dvd[comment]', "* Comment:") %>
         <%= text_field_tag('dvd[comment]') %> <br>
 
         <div class="radioWrapper">
-          <span>Is this DVD currently on loan?</span>
+          <span>* Is this DVD currently on loan?</span>
           <%= radio_button_tag('dvd[on_loan]', true) %>
           <%= label_tag(:on_loan_true, "Yes") %>
           <%= radio_button_tag('dvd[on_loan]', false, true) %>
@@ -182,7 +186,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Have I watched this DVD already?</span>
+          <span>* Have I watched this DVD already?</span>
           <%= radio_button_tag('dvd[viewed]', true) %>
           <%= label_tag(:viewed_true, "Yes") %>
           <%= radio_button_tag('dvd[viewed]', false, true) %>
@@ -190,7 +194,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Is this DVD a digital copy?</span>
+          <span>* Is this DVD a digital copy?</span>
           <%= radio_button_tag('dvd[is_digital]', true) %>
           <%= label_tag(:is_digital_true, "Yes") %>
           <%= radio_button_tag('dvd[is_digital]', false, true) %>
@@ -198,7 +202,7 @@
         </div>
 
         <div class="radioWrapper">
-          <span>Do I already own a copy of this DVD?</span>
+          <span>* Do I already own a copy of this DVD?</span>
           <%= radio_button_tag('dvd[is_owned]', true) %>
           <%= label_tag(:is_owned_true, "Yes") %>
           <%= radio_button_tag('dvd[is_owned]', false, true) %>

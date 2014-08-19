@@ -1,6 +1,9 @@
 class DvdsController < ApplicationController
+
   def index
     @dvds = Dvd.all
+    @new_dvd = Dvd.new(on_loan: false, viewed: false, is_digital: false, is_owned: false)
+    @new_dvd.actors.build
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @dvds }
@@ -16,14 +19,21 @@ class DvdsController < ApplicationController
   end
 
   def create
-    dvd = Dvd.new(dvd_params)
-    dvd.save!
-    actor_params.each do |name|
-      actor = Actor.new(full_name: name)
-      actor.save!
-      ActorDvd.create!( {dvd_id: dvd.id, actor_id: actor.id} )
+    @new_dvd = Dvd.new(dvd_params)
+    if @new_dvd.save
+      actor_params.each do |name|
+        actor = Actor.new(full_name: name)
+        actor.save!
+        ActorDvd.create!( {dvd_id: dvd.id, actor_id: actor.id} )
+      end
+      redirect_to '/dvds'
+    else
+      @dvds = Dvd.all 
+      actor_params.each do |name|
+        @new_dvd.actors.build(full_name: name)
+      end
+      render 'index'
     end
-    redirect_to '/dvds'
   end
 
   def edit

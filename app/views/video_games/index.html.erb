@@ -83,50 +83,55 @@
         <p>The fields marked with an * are required.</p>
 
         <%= label_tag('video_game[title]', "* Title:") %>
-        <%= text_field_tag('video_game[title]') %> <br>
+        <%= text_field_tag('video_game[title]', @new_vg.title) %> <br>
 
         <%= label_tag('video_game[console]', "* Console:") %>
-        <%= text_field_tag('video_game[console]') %> <br>
+        <%= text_field_tag('video_game[console]', @new_vg.console) %> <br>
 
         <%= label_tag('video_game[category]', "* Category:") %>
-        <%= text_field_tag('video_game[category]') %> <br>
+        <%= text_field_tag('video_game[category]', @new_vg.category) %> <br>
 
         <%= label_tag('video_game[comment]', "* Comment:") %>
-        <%= text_field_tag('video_game[comment]') %> <br>
+        <%= text_field_tag('video_game[comment]', @new_vg.comment) %> <br>
 
         <div class="radioWrapper">
           <span>* Is this video game currently on loan?</span>
-          <%= radio_button_tag('video_game[on_loan]', true) %>
+          <%= radio_button_tag('video_game[on_loan]', true, @new_vg.on_loan == true) %>
           <%= label_tag(:on_loan_true, "Yes") %>
-          <%= radio_button_tag('video_game[on_loan]', false, true) %>
+          <%= radio_button_tag('video_game[on_loan]', false, @new_vg.on_loan == false) %>
           <%= label_tag(:on_loan_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Have I played this video game already?</span>
-          <%= radio_button_tag('video_game[played]', true) %>
+          <%= radio_button_tag('video_game[played]', true, @new_vg.played == true) %>
           <%= label_tag(:played_true, "Yes") %>
-          <%= radio_button_tag('video_game[played]', false, true) %>
+          <%= radio_button_tag('video_game[played]', false, @new_vg.played == false) %>
           <%= label_tag(:played_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Is this video game a digital copy?</span>
-          <%= radio_button_tag('video_game[is_digital]', true) %>
+          <%= radio_button_tag('video_game[is_digital]', true, @new_vg.is_digital == true) %>
           <%= label_tag(:is_digital_true, "Yes") %>
-          <%= radio_button_tag('video_game[is_digital]', false, true) %>
+          <%= radio_button_tag('video_game[is_digital]', false, @new_vg.is_digital == false) %>
           <%= label_tag(:is_digital_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Do I already own a copy of this video game?</span>
-          <%= radio_button_tag('video_game[is_owned]', true) %>
+          <%= radio_button_tag('video_game[is_owned]', true, @new_vg.is_owned == true) %>
           <%= label_tag(:is_owned_true, "Yes") %>
-          <%= radio_button_tag('video_game[is_owned]', false, true) %>
+          <%= radio_button_tag('video_game[is_owned]', false, @new_vg.is_owned == false) %>
           <%= label_tag(:is_owned_false, "No") %> <br>
         </div>
 
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+        <!-- error msg -->
+        <% if @new_vg.errors.any? %>
+          <div class="errorMsg">Please check the required fields.</div>
+        <% end %>
 
         <div class="buttonWrapper submit">
           <button type="submit">Submit New Video Game</button>

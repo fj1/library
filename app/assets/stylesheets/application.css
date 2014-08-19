@@ -124,6 +124,13 @@ h3, h5 {
   float: none;
 }
 
+.errorMsg {
+  color: red;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 1em;
+}
+
 .submit {
   padding-top: 35px;
 }

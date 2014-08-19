@@ -87,12 +87,14 @@
         <p>The fields marked with an * are required.</p>
 
         <%= label_tag('book[title]', "* Title:") %>
-        <%= text_field_tag('book[title]') %> <br>
+        <%= text_field_tag('book[title]', @new_book.title) %> <br>
 
+        <!-- the [] in authors[] tells rails to accept an array -->
         <div class="authorWrapper">
-          <!-- the [] in authors[] tells rails to accept an array -->
-          <%= label_tag('authors[]', "* Author's name:") %>
-          <%= text_field_tag('authors[]') %> <br>
+          <% @new_book.authors.each do |author| %>
+            <%= label_tag('authors[]', "* Author's name:") %>
+            <%= text_field_tag('authors[]', author.full_name) %> <br>
+          <% end %>
         </div>
 
         <div class="buttonWrapper">
@@ -100,44 +102,49 @@
         </div>
 
         <%= label_tag('book[category]', "* Category:") %>
-        <%= text_field_tag('book[category]') %> <br>
+        <%= text_field_tag('book[category]', @new_book.category) %> <br>
 
         <%= label_tag('book[comment]', "* Comment:") %>
-        <%= text_field_tag('book[comment]') %> <br>
+        <%= text_field_tag('book[comment]', @new_book.category) %> <br>
 
         <div class="radioWrapper">
           <span>* Is this book currently on loan?</span>
-          <%= radio_button_tag('book[on_loan]', true) %>
+          <%= radio_button_tag('book[on_loan]', true, @new_book.on_loan == true) %>
           <%= label_tag(:on_loan_true, "Yes") %>
-          <%= radio_button_tag('book[on_loan]', false, true) %>
+          <%= radio_button_tag('book[on_loan]', false, @new_book.on_loan == false) %>
           <%= label_tag(:on_loan_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Have I read this book already?</span>
-          <%= radio_button_tag('book[read]', true) %>
+          <%= radio_button_tag('book[read]', true, @new_book.read == true) %>
           <%= label_tag(:read_true, "Yes") %>
-          <%= radio_button_tag('book[read]', false, true) %>
+          <%= radio_button_tag('book[read]', false, @new_book.read == false) %>
           <%= label_tag(:read_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Is this book a digital copy?</span>
-          <%= radio_button_tag('book[is_digital]', true) %>
+          <%= radio_button_tag('book[is_digital]', true, @new_book.is_digital == true) %>
           <%= label_tag(:is_digital_true, "Yes") %>
-          <%= radio_button_tag('book[is_digital]', false, true) %>
+          <%= radio_button_tag('book[is_digital]', false, @new_book.is_digital == false) %>
           <%= label_tag(:is_digital_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Do I already own a copy of this book?</span>
-          <%= radio_button_tag('book[is_owned]', true) %>
+          <%= radio_button_tag('book[is_owned]', true, @new_book.is_owned == true) %>
           <%= label_tag(:is_owned_true, "Yes") %>
-          <%= radio_button_tag('book[is_owned]', false, true) %>
+          <%= radio_button_tag('book[is_owned]', false, @new_book.is_owned == false) %>
           <%= label_tag(:is_owned_false, "No") %> <br>
         </div>
 
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+        <!-- error msg -->
+        <% if @new_book.errors.any? %>
+          <div class="errorMsg">Please check the required fields.</div>
+        <% end %>
 
       <div class="buttonWrapper submit">
         <button type="submit">Submit New Book</button>

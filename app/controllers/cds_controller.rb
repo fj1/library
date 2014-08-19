@@ -1,8 +1,12 @@
 class CdsController < ApplicationController
+
   def index
     @cds = Cd.all
+    @new_cd = Cd.new(on_loan: false, listened: false, is_digital: false, is_owned: false)
+    @new_cd.musicians.build
+    @new_cd.ensembles.build
     respond_to do |format|
-      format.html #index.html.erb
+      format.html # index.html.erb
       format.json { render :json => @cds }
     end
   end
@@ -16,28 +20,38 @@ class CdsController < ApplicationController
   end
 
   def create
-    cd = Cd.new(cd_params)
-    cd.save!
-    # logic to check for .any? on musician
-    # puts "NAMES: #{musician_names.inspect}"
-    if musician_names.any? 
+    @new_cd = Cd.new(cd_params)
+    # cd.save will actually return true/false
+    if @new_cd.save
+      # logic to check for .any? on musician
+      # puts "NAMES: #{musician_names.inspect}"
+      if musician_names.any? 
+        musician_names.each do |name|
+          musician = Musician.new(full_name: name)
+          musician.save!
+          CdMusician.create!( {cd_id: @new_cd.id, musician_id: musician.id} )
+        end
+      end
+      # logic to check for .any? on ensemble
+      # puts "ENSEMBLES: #{ensemble_params.inspect}"
+      if ensemble_params.any?
+        ensemble_params.each do |e|
+          ensemble = Ensemble.new(name: e)
+          ensemble.save!
+          CdEnsemble.create!( {cd_id: @new_cd.id, ensemble_id: ensemble.id} )
+        end
+      end
+      redirect_to '/cds'
+    else 
+      @cds = Cd.all
       musician_names.each do |name|
-        musician = Musician.new(full_name: name)
-        musician.save!
-        CdMusician.create!( {cd_id: cd.id, musician_id: musician.id} )
+        @new_cd.musicians.build(full_name: name)
       end
-    end
-    # logic to check for .any on ensemble
-    puts "ENSEMBLES: #{ensemble_params.inspect}"
-    # ensemble_params = ["Band Uno", "Band Segundo"]
-    if ensemble_params.any?
-      ensemble_params.each do |e|
-        ensemble = Ensemble.new(name: e)
-        ensemble.save!
-        CdEnsemble.create!( {cd_id: cd.id, ensemble_id: ensemble.id} )
+      ensemble_params.each do |name|
+        @new_cd.ensembles.build(name: name)
       end
+      render 'index'
     end
-    redirect_to '/cds'
   end
 
   def edit
@@ -45,9 +59,13 @@ class CdsController < ApplicationController
   end
 
   def update
-    @cd = Cd.find(params[:id])
-    @cd.update(cd_params)
-    redirect_to '/cds'
+    @updated_cd = Cd.find(params[:id])
+    if @updated_cd.update(cd_params)
+      redirect_to '/cds'
+    else
+      @cds = Cd.all
+      render 'index'
+    end
   end
 
   def destroy

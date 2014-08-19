@@ -101,11 +101,13 @@
         <p>The fields marked with an * are required.</p>
 
         <%= label_tag('cd[title]', "* Title:") %>
-        <%= text_field_tag('cd[title]') %> <br>
+        <%= text_field_tag('cd[title]', @new_cd.title) %> <br>
 
         <div class="musicianWrapper">
-          <%= label_tag('cd[full_name][]', "Musician's name:") %>
-          <%= text_field_tag('cd[full_name][]') %> <br>
+          <% @new_cd.musicians.each do |musician| %>       
+            <%= label_tag('cd[full_name][]', "Musician's name:") %>
+            <%= text_field_tag('cd[full_name][]', musician.full_name) %> <br>
+          <% end %>
         </div>
 
         <div class="buttonWrapper">
@@ -113,8 +115,10 @@
         </div>
 
         <div class="ensembleWrapper">
-          <%= label_tag('ensembles[]', "Band's name:") %>
-          <%= text_field_tag('ensembles[]') %> <br>
+          <% @new_cd.ensembles.each do |ensemble| %>
+            <%= label_tag('ensembles[]', "Band's name:") %>
+            <%= text_field_tag('ensembles[]', ensemble.name) %> <br>
+          <% end %>
         </div>
 
         <div class="buttonWrapper">
@@ -122,44 +126,49 @@
         </div>
 
         <%= label_tag('cd[category]', "* Category:") %>
-        <%= text_field_tag('cd[category]') %> <br>
+        <%= text_field_tag('cd[category]', @new_cd.category) %> <br>
 
         <%= label_tag('cd[comment]', "* Comments:") %>
-        <%= text_field_tag('cd[comment]') %> <br>
+        <%= text_field_tag('cd[comment]', @new_cd.comment) %> <br>
 
         <div class="radioWrapper">
           <span>* Is this CD currently on loan?</span>
-          <%= radio_button_tag('cd[on_loan]', true) %>
+          <%= radio_button_tag('cd[on_loan]', true, @new_cd.on_loan == true) %>
           <%= label_tag(:on_loan_true, "Yes") %>
-          <%= radio_button_tag('cd[on_loan]', false, true) %>
+          <%= radio_button_tag('cd[on_loan]', false, @new_cd.on_loan == false) %>
           <%= label_tag(:on_loan_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Have I listened to this CD already?</span>
-          <%= radio_button_tag('cd[listened]', true) %>
+          <%= radio_button_tag('cd[listened]', true, @new_cd.listened == true) %>
           <%= label_tag(:listened_true, "Yes") %>
-          <%= radio_button_tag('cd[listened]', false, true) %>
+          <%= radio_button_tag('cd[listened]', false, @new_cd.listened == false) %>
           <%= label_tag(:listened_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Is this CD a digital copy?</span>
-          <%= radio_button_tag('cd[is_digital]', true) %>
+          <%= radio_button_tag('cd[is_digital]', true, @new_cd.is_digital == true) %>
           <%= label_tag(:is_digital_true, "Yes") %>
-          <%= radio_button_tag('cd[is_digital]', false, true) %>
+          <%= radio_button_tag('cd[is_digital]', false, @new_cd.is_digital == false) %>
           <%= label_tag(:is_digital_false, "No") %> <br>
         </div>
 
         <div class="radioWrapper">
           <span>* Do I already own a copy of this CD?</span>
-          <%= radio_button_tag('cd[is_owned]', true) %>
+          <%= radio_button_tag('cd[is_owned]', true, @new_cd.is_owned == true) %>
           <%= label_tag(:is_owned_true, "Yes") %>
-          <%= radio_button_tag('cd[is_owned]', false, true) %>
+          <%= radio_button_tag('cd[is_owned]', false, @new_cd.is_owned == false) %>
           <%= label_tag(:is_owned_false, "No") %> <br>
         </div>
 
         <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+
+        <!-- error msg -->
+        <% if @new_cd.errors.any? %>
+          <div class="errorMsg">Please check the required fields.</div>
+        <% end %>
 
         <div class="buttonWrapper submit">
           <button type="submit">Submit New CD</button>
@@ -185,7 +194,7 @@
         <%= label_tag('cd[title]', "* Title:") %>
         <%= text_field_tag('cd[title]') %> <br>
 
-        <div class="musicianWrapper">
+        <div class="musicianWrapper">       
           <%= label_tag('cd[full_name][]', "Musician's name:") %>
           <%= text_field_tag('cd[full_name][]') %> <br>
         </div>
@@ -247,7 +256,7 @@
           <button type="submit">Submit Edited CD</button>
         </div>
       <% end %>
-    </div> <!-- end id="panel2-2" -->
+    </div> <!-- end id="panel2-2"
 
     <!-- ***** 3RD TAB: DELETE ITEM ***** -->
     <div class="content" id="panel2-3">
@@ -257,8 +266,9 @@
         <button id="deleteButton">Delete selected row</button>
       </div>     
     </div> <!-- end id="panel2-3" -->
+
   </div> <!-- end class="tabs-content" -->
-</div> <!-- end id="tabsWrapper" -->
+</div> <!-- end id="tabsWrapper" --> -->
 
 <!-- JAVASCRIPT -->
 
@@ -355,7 +365,7 @@
       var owned = $('.selected .owned').data('value');
 
       // **** UPDATE ROUTE to point to selected cd's id
-      $("#edit_form").attr("action", "/cds/" + id)
+      $("#edit_form").attr("action", "/cds/" + id);
       
       // **** POPULATE FORM with the selected row's info
       $('#edit_form #hiddenId').val(id);

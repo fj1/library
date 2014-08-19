@@ -1,6 +1,8 @@
 class VideoGamesController < ApplicationController
+
   def index
     @vgs = VideoGame.all
+    @new_vg = VideoGame.new(on_loan: false, played: false, is_digital: false, is_owned: false)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @vgs }
@@ -16,9 +18,13 @@ class VideoGamesController < ApplicationController
   end
 
   def create
-    vg = VideoGame.new(vg_params)
-    vg.save!
-    redirect_to '/video_games'
+    @new_vg = VideoGame.new(vg_params)
+    if @new_vg.save
+      redirect_to '/video_games'
+    else
+      @vgs = VideoGame.all 
+      render 'index'
+    end
   end
 
   def edit

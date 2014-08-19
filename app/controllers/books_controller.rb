@@ -2,6 +2,8 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
+    @new_book = Book.new(on_loan: false, read: false, is_digital: false, is_owned: false)
+    @new_book.authors.build
     respond_to do |format|
       format.html  # index.html.erb
       format.json  { render :json => @books }
@@ -17,14 +19,22 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params)
-    book.save!    
-    author_params.each do |name|
-      author = Author.new(full_name: name)
-      author.save!
-      AuthorBook.create!({book_id: book.id, author_id: author.id})
+    @new_book = Book.new(book_params)
+    if @new_book.save
+      author_params.each do |name|
+        author = Author.new(full_name: name)
+        author.save!
+        AuthorBook.create!({book_id: book.id, author_id: author.id})
+      end
+      redirect_to '/books'
+    else
+      @books = Book.all
+      author_params.each do |name|
+        puts "name is " + name
+        @new_book.authors.build(full_name: name)
+      end
+      render 'index'
     end
-    redirect_to '/books'
   end
 
   def edit
@@ -32,9 +42,13 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:id])
-    @book.update(book_params)
-    redirect_to '/books'
+    @updated_book = Book.find(params[:id])
+    if @book.update(book_params)
+      redirect_to '/books'
+    else
+      @books = Book.all 
+      render 'index'
+    end
   end
 
   def destroy

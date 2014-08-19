@@ -120,6 +120,10 @@ h3, h5 {
   float: none;
 }
 
+.submit {
+  padding-top: 35px;
+}
+
 /*************** customized css from http://datatables.net/manual/styling/theme-creator ***************/
 
 /*

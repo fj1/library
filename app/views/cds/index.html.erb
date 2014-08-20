@@ -10,9 +10,10 @@
       <th>Category</th>
       <th>Comments</th>
       <th>Loaned out?</th>
-      <th>Previously listened?</th>
+      <!-- <th>Previously listened?</th> -->
       <th>Digital?</th>
       <th>Owned?</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -51,7 +52,7 @@
           <% end %> 
         </td>
         <!-- listened if/else -->  
-        <td class="listened" data-value="<%= cd.listened %>"> 
+<!--         <td class="listened" data-value="<%= cd.listened %>"> 
           <% if cd.listened == true %> 
             <p style="display:none">a</p>
             <img class="check" src="/assets/green-check.png"/>
@@ -59,7 +60,7 @@
             <p style="display:none">b</p>
             <img class="check" src="/assets/red-check.png"/>
           <% end %> 
-        </td>
+        </td> -->
         <!-- is_digital if/else -->
         <td class="digital" data-value="<%= cd.is_digital %>"> 
           <% if cd.is_digital == true %> 
@@ -79,6 +80,10 @@
             <p style="display:none">b</p>
             <img class="check gift" src="/assets/gift.png"/>
           <% end %> 
+        </td>
+        <!-- edit button -->
+        <td class="editColumn">
+          <button class="editButton">Edit</button>
         </td>
       </tr>
     <% end %>
@@ -178,12 +183,15 @@
 
     <!-- ***** 2ND TAB: EDIT ITEM ***** -->
     <div class="content" id="panel2-2">
-      <h3>Select the row you would like to edit.</h3>
+      <!-- error msg -->
+      <!-- <div class="errorMsg idError"></div> -->
+
+<!--       <h3>Select the row you would like to edit.</h3>
       <h5>Then click the button:</h5>
 
       <div class="buttonWrapper">
         <button id="editButton">Edit selected row</button>
-      </div>
+      </div> -->
         
       <%= form_tag("/cds", method: "put", :id => "edit_form") do %>
 
@@ -335,14 +343,23 @@
     });
 
     // *********** update row ***********
-    $('#editButton').click(function () {
+    $('.editButton').click(function () {
+      // make all tabbed panels inactive
+      // $('.tab-title').removeClass('active');
+      // make the 'edit' tabbed panel active 
+      // $('.tab-title:nth-child(2)').addClass('active');
+      $('.tab-title:nth-child(2) a').click();
+
       // **** GRAB INFORMATION from selected row
-      var id = $('.selected').children().first().text().trim();
-      var title = $('.selected .title').text().trim();
-      console.log("title:", title);
+      var id = $(this).closest('tr').children().first().text().trim();
+      console.log("id is ", id);
+      // we can use the new var 'row' to make accessing the rest of the info easier
+      var row = $(this).closest('tr');
+      var title = row.find('.title').text().trim();
+      console.log("TITLE:", title);
       // iterate through musicians in the table
       var musicians = [];
-      $('.selected .musicians span').each(function(index, element) {
+      row.find('.musicians span').each(function(index, element) {
         var name = $(element).text();
         console.log("element is ", name);
         musicians.push(name);
@@ -350,19 +367,19 @@
       console.log("musicians are ", musicians);
       // iterate through ensembles in the table
       var ensembles = [];
-      $('.selected .ensembles span').each(function(index, element) {
+      row.find('.ensembles span').each(function(index, element) {
         var name = $(element).text();
         console.log("element is ", name);
         ensembles.push(name);
       });
       console.log("ensembles are ", ensembles);
       // rest of table      
-      var category = $('.selected .category').text().trim();
-      var comment = $('.selected .comment').text().trim();
-      var loan = $('.selected .loan').data('value');
-      var listened = $('.selected .listened').data('value');
-      var digital = $('.selected .digital').data('value');
-      var owned = $('.selected .owned').data('value');
+      var category = row.find('.category').text().trim();
+      var comment = row.find('.comment').text().trim();
+      var loan = row.find('.loan').data('value');
+      var listened = row.find('.listened').data('value');
+      var digital = row.find('.digital').data('value');
+      var owned = row.find('.owned').data('value');
 
       // **** UPDATE ROUTE to point to selected cd's id
       $("#edit_form").attr("action", "/cds/" + id);

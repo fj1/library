@@ -89,6 +89,13 @@ display: none;
   margin: 0 auto;
 }
 
+.editButton {
+  font-size: 0.9em;
+  padding: 10px 25px 10px 25px;
+  text-align: center;
+  margin: 10px 0 10px 0;
+}
+
 /* TABBED CONTENT */
 
 #tabsWrapper {

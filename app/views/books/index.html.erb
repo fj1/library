@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <% @books.each do |book| %>
-      <tr>
+      <tr data-id="<%= book.id %>">
         <td class="hiddenColumn"> <%= "#{book.id}" %> </td>    
         <td class="title"> <%= "#{book.title}" %> </td>
         <td class="author"> <% book.authors.each do |a| %> 
@@ -154,12 +154,12 @@
 
   <!-- ***** 2ND TAB: EDIT ITEM ***** -->
   <div class="content" id="panel2-2">
-    <h3>Click on the item you would like to edit.</h3>
+<!--     <h3>Click on the item you would like to edit.</h3>
     <h5>Then click the button:</h5>
 
     <div class="buttonWrapper">
       <button id="editButton">Edit selected row</button>
-    </div>
+    </div> -->
 
     <p>The fields marked with an * are required.</p>
 

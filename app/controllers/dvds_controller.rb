@@ -43,6 +43,17 @@ class DvdsController < ApplicationController
   def update
     @dvd = Dvd.find(params[:id])
     @dvd.update(dvd_params)
+    # handling multiple actors in the edit form
+    actor_params.each do |name|
+      # try to find actor that is already assoc. with dvd id
+      actor = @dvd.actors.find {|actor| actor.full_name == name}
+      # if no match, then create new actor and dvd-actor relationship
+      if actor.nil?
+        actor = Actor.new(full_name: name)
+        actor.save!
+        ActorDvd.create!( {dvd_id: @dvd.id, actor_id: actor.id} )
+      end
+    end
     redirect_to '/dvds'
   end
 

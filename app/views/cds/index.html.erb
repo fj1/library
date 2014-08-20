@@ -150,7 +150,7 @@
           <%= label_tag(:listened_true, "Yes") %>
           <%= radio_button_tag('cd[listened]', false, @new_cd.listened == false) %>
           <%= label_tag(:listened_false, "No") %> <br>
-        </div>
+        </div> 
 
         <div class="radioWrapper">
           <span>* Is this CD a digital copy?</span>
@@ -183,8 +183,6 @@
 
     <!-- ***** 2ND TAB: EDIT ITEM ***** -->
     <div class="content" id="panel2-2">
-      <!-- error msg -->
-      <!-- <div class="errorMsg idError"></div> -->
 
 <!--       <h3>Select the row you would like to edit.</h3>
       <h5>Then click the button:</h5>
@@ -264,7 +262,7 @@
           <button type="submit">Submit Edited CD</button>
         </div>
       <% end %>
-    </div> <!-- end id="panel2-2"
+    </div> <!-- end id="panel2-2" -->
 
     <!-- ***** 3RD TAB: DELETE ITEM ***** -->
     <div class="content" id="panel2-3">
@@ -276,7 +274,7 @@
     </div> <!-- end id="panel2-3" -->
 
   </div> <!-- end class="tabs-content" -->
-</div> <!-- end id="tabsWrapper" --> -->
+</div> <!-- end id="tabsWrapper" --> 
 
 <!-- JAVASCRIPT -->
 
@@ -343,11 +341,8 @@
     });
 
     // *********** update row ***********
-    $('.editButton').click(function () {
-      // make all tabbed panels inactive
-      // $('.tab-title').removeClass('active');
-      // make the 'edit' tabbed panel active 
-      // $('.tab-title:nth-child(2)').addClass('active');
+    $('#cds-table').on('click', '.editButton', function () {
+      // open the tabbed 'edit' panel 
       $('.tab-title:nth-child(2) a').click();
 
       // **** GRAB INFORMATION from selected row

@@ -9,9 +9,10 @@
       <th>Category</th>
       <th>Comments</th>
       <th>Loaned out?</th>
-      <th>Already read?</th>
+      <!-- <th>Already read?</th> -->
       <th>Digital?</th>
       <th>Owned?</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -37,7 +38,7 @@
           <% end %> 
         </td>
         <!-- read if/else -->  
-        <td class="read" data-value="<%= book.read %>"> 
+<!--         <td class="read" data-value="<%= book.read %>"> 
           <% if book.read == true %> 
             <p style="display:none">a</p>
             <img class="check" src="/assets/green-check.png"/>
@@ -45,7 +46,7 @@
             <p style="display:none">b</p>
             <img class="check" src="/assets/red-check.png"/>
           <% end %> 
-        </td>
+        </td> -->
         <!-- is_digital if/else -->
         <td class="digital" data-value="<%= book.is_digital %>"> 
           <% if book.is_digital == true %> 
@@ -65,6 +66,9 @@
             <p style="display:none">b</p>
             <img class="check gift" src="/assets/gift.png"/>
           <% end %> 
+        </td>
+        <td class="editColumn">
+          <button class="editButton">Edit</button>
         </td>
       </tr>
     <% end %> 
@@ -292,32 +296,37 @@
     });
 
     // *********** update row ***********
-    $('#editButton').click(function () {
+    $('#books-table').on('click', '.editButton', function () {
+      // open the tabbed 'edit' panel 
+      $('.tab-title:nth-child(2) a').click();
+
       // **** GRAB INFO from selected row
-      var id = $('.selected').children().first().text().trim();
+      var id = $(this).closest('tr').children().first().text().trim();
       console.log("id: ", id);
-      var title = $('.selected .title').text().trim();
+      // we can use the new var 'row' to make accessing the rest of the info easier
+      var row = $(this).closest('tr');
+      var title = row.find('.title').text().trim();
       console.log("title: ", title);
       // iterate through authors in the table
       var authors = [];
-      $('.selected .author span').each(function(index, element) {
+      row.find('.author span').each(function(index, element) {
         var name = $(element).text();
         console.log("element is ", name);
         authors.push(name);
       });
       console.log("authors are ", authors);
       // continue to select info 
-      var category = $('.selected .category').text().trim();
+      var category = row.find('.category').text().trim();
       console.log("category: ", category);
-      var comment = $('.selected .comment').text().trim();
+      var comment = row.find('.comment').text().trim();
       console.log("comment: ", comment);
-      var loan = $('.selected .loan').data('value');
+      var loan = row.find('.loan').data('value');
       console.log("loan is ", loan);
-      var read = $('.selected .read').data('value');
+      var read = row.find('.read').data('value');
       console.log("read: ", read);
-      var digital = $('.selected .digital').data('value');
+      var digital = row.find('.digital').data('value');
       console.log("digital: ", digital);
-      var owned = $('.selected .owned').data('value');
+      var owned = row.find('.owned').data('value');
       console.log("owned: ", owned);
 
       // **** UPDATE ROUTE to point to selected book's id

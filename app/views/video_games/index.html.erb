@@ -9,9 +9,10 @@
       <th>Category</th>
       <th>Comments</th>
       <th>Loaned out?</th>
-      <th>Already played?</th>
+      <!-- <th>Already played?</th> -->
       <th>Digital?</th>
       <th>Owned?</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -33,7 +34,7 @@
           <% end %> 
         </td>
         <!-- played if/else -->  
-        <td class="played" data-value="<%= v.played %>"> 
+<!--         <td class="played" data-value="<%= v.played %>"> 
           <% if v.played == true %> 
             <p style="display:none">a</p>
             <img class="check" src="/assets/green-check.png"/>
@@ -41,7 +42,7 @@
             <p style="display:none">b</p>
             <img class="check" src="/assets/red-check.png"/>
           <% end %> 
-        </td>
+        </td> -->
         <!-- is_digital if/else -->
         <td class="digital" data-value="<%= v.is_digital %>"> 
           <% if v.is_digital == true %> 
@@ -61,6 +62,10 @@
             <p style="display:none">b</p>
             <img class="check gift" src="/assets/gift.png"/>
           <% end %> 
+        </td>
+        <!-- edit button -->
+        <td class="editColumn">
+          <button class="editButton">Edit</button>
         </td>
       </tr>
     <% end %> 
@@ -141,13 +146,7 @@
 
     <!-- ***** 2ND TAB: EDIT ITEM ***** -->
     <div class="content" id="panel2-2">
-      <h3>Select the row you would like to edit.</h3>
-      <h5>Then click the button:</h5>
 
-      <div class="buttonWrapper">
-        <button id="editButton">Edit selected row</button>
-      </div>
-     
      <%= form_tag("/video_games", method: "put", :id => "edit_form") do %>
       
        <p>The fields marked with an * are required.</p>
@@ -265,17 +264,21 @@
     });
 
     // *********** update row ***********
-    $('#editButton').click(function () {
+    $('#video-games-table').on('click', '.editButton', function () {
+      // open the tabbed 'edit' panel 
+      $('.tab-title:nth-child(2) a').click();
+
       // grab info from selected row
-      var id = $('.selected').children().first().text().trim();
-      var title = $('.selected .title').text().trim();
-      var console = $('.selected .console').text().trim();
-      var category = $('.selected .category').text().trim();
-      var comment = $('.selected .comment').text().trim();
-      var loan = $('.selected .loan').data('value');
-      var listened = $('.selected .listened').data('value');
-      var digital = $('.selected .digital').data('value');
-      var owned = $('.selected .owned').data('value');
+      var id = $(this).closest('tr').children().first().text().trim();
+      var row = $(this).closest('tr');
+      var title = row.find('.title').text().trim();
+      var console = row.find('.console').text().trim();
+      var category = row.find('.category').text().trim();
+      var comment = row.find('.comment').text().trim();
+      var loan = row.find('.loan').data('value');
+      var listened = row.find('.listened').data('value');
+      var digital = row.find('.digital').data('value');
+      var owned = row.find('.owned').data('value');
    
       // update route to point to selected cd's id
       $("#edit_form").attr("action", "/video_games/" + id)

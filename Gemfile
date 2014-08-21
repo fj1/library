@@ -49,7 +49,10 @@ gem 'pry-byebug'
 
 # pretty-fies table format in the rails console
 gem 'hirb'
-
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
 
 
 

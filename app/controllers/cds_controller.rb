@@ -71,6 +71,8 @@ class CdsController < ApplicationController
         CdMusician.create!( {cd_id: @updated_cd.id, musician_id: musician.id} )
       end    
     end
+    # "ensembles"=>{"name"=>["asdf"]}
+    # "ensembles"=>["asdf"]
     ensemble_params.each do |name|
       # try to find ensemble that is already assoc. with cd id
       ensemble = @updated_cd.ensembles.find {|ensemble| ensemble.name == name}
@@ -83,30 +85,6 @@ class CdsController < ApplicationController
     end
     redirect_to '/cds'
   end
-
-    # if @updated_cd.update(cd_params)
-    #   musician_names.each do |name|
-    #     musician = @updated_cd.musicians.find { |musician| musician.full_name == name }
-    #     if musician.nil?
-    #       musician = Musician.new(full_name: name)
-    #       musician.save!
-    #       CdMusician.create!( {cd_id: @updated_cd.id, musician_id: musician.id} )
-    #     end
-    #   end
-    #   ensemble_params.each do |name|
-    #     ensemble = @updated_cd.ensembles.find { |ensemble| ensemble.name == name }
-    #     if ensemble.nil?
-    #       ensemble = Ensemble.new(name: name)
-    #       ensemble.save!
-    #       CdEnsemble.create!( {cd_id: @updated_cd.id, ensemble_id: ensemble.id} )
-    #     end
-    #   end
-    #   redirect_to '/cds'
-    # else
-    #   @cds = Cd.all
-    #   render 'index'
-    # end
-  # end
 
   def destroy
     @cd = Cd.find(params[:id])

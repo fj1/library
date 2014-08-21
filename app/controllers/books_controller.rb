@@ -24,7 +24,7 @@ class BooksController < ApplicationController
       author_params.each do |name|
         author = Author.new(full_name: name)
         author.save!
-        AuthorBook.create!({book_id: book.id, author_id: author.id})
+        AuthorBook.create!({book_id: @new_book.id, author_id: author.id})
       end
       redirect_to '/books'
     else
@@ -43,7 +43,8 @@ class BooksController < ApplicationController
 
   def update
     @updated_book = Book.find(params[:id])
-    if @updated_book.update(book_params)
+    @updated_book.update(book_params)
+    # if @updated_book.update(book_params)
       # handling multiple authors in the edit form
       author_params.each do |name|
         # try to find author that is already assoc. with book id
@@ -56,10 +57,11 @@ class BooksController < ApplicationController
         end
       end
       redirect_to '/books'
-    else
-      @books = Book.all 
-      render 'index'
-    end
+    # else
+      # @books = Book.all 
+      # render 'index'
+    # end
+    # redirect_to '/books'
   end
 
   def destroy
@@ -76,7 +78,11 @@ class BooksController < ApplicationController
   end
 
   def author_params
-    params[:authors]
+    if params[:authors].nil?
+      return []
+    else
+      params[:authors]
+    end
   end
 
 end

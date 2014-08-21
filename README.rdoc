@@ -1,4 +1,4 @@
-***** DataBeast *****
+DataBeast
 
 DataBeast is a demo web application, and is one of my senior projects for MakerSquare. It is designed for a user to manage their personal library of books, CDs, DVDs, and video games. 
 

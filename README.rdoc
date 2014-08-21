@@ -1,12 +1,16 @@
 DataBeast
 
+
 DataBeast is a demo web application, and is one of my senior projects for MakerSquare. It is designed for a user to manage their personal library of books, CDs, DVDs, and video games. 
 
+
 It is a basic CRUD application built with:
-• Ruby, Rails
-• JavaScript, jQuery
-• HTML, CSS, Foundation
-• DataTables, a JavaScript/jQuery plug-in: www.datatables.net
+
+- Ruby, Rails
+- JavaScript, jQuery
+- HTML, CSS, Foundation
+- DataTables, a JavaScript/jQuery plug-in: www.datatables.net
+
 
 Viewable at http://data-beast.herokuapp.com/
 

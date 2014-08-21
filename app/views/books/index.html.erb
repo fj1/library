@@ -31,7 +31,7 @@
           <% if book.on_loan == true %> 
             <!-- display:none to allow for 'sorting' the icons -->
             <p style="display:none">a</p>
-            <img class="check" src="/assets/green-check.png"/>
+            <%= image_tag("green-check.png", class: "check") %>
           <% else %> 
             <p style="display:none">b</p>
             <img class="check" src="/assets/red-check.png"/>

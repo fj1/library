@@ -4696,8 +4696,8 @@ textarea {
   input[type="time"]:focus,
   input[type="url"]:focus,
   textarea:focus {
-    background: ##c58358;
-    border-color: ##c58358;
+    background: #c58358;
+    border-color: #c58358;
     outline: none; }
   input[type="text"]:disabled,
   input[type="password"]:disabled,

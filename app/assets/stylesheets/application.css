@@ -107,6 +107,10 @@ display: none;
   margin-left: 18%;
 }
 
+#editTab {
+  display: none;
+}
+
 table, .tabs-content {
   border-top: 1px solid #c58358;
   border-bottom: 1px solid #c58358;

@@ -80,7 +80,7 @@
 <div id="tabsWrapper">
   <ul class="tabs" data-tab>
     <li class="tab-title active"><a href="#panel2-1">Create New Item</a></li>
-    <li class="tab-title"><a href="#panel2-2">Edit Item</a></li>
+    <li class="tab-title" id="editTab"><a href="#panel2-2">Edit Item</a></li>
     <li class="tab-title"><a href="#panel2-3">Delete Item</a></li>
   </ul>
   <div class="tabs-content">
@@ -158,12 +158,6 @@
 
   <!-- ***** 2ND TAB: EDIT ITEM ***** -->
   <div class="content" id="panel2-2">
-<!--     <h3>Click on the item you would like to edit.</h3>
-    <h5>Then click the button:</h5>
-
-    <div class="buttonWrapper">
-      <button id="editButton">Edit selected row</button>
-    </div> -->
 
     <p>The fields marked with an * are required.</p>
 
@@ -296,9 +290,14 @@
     });
 
     // *********** update row ***********
+
     $('#books-table').on('click', '.editButton', function () {
-      // open the tabbed 'edit' panel 
-      $('.tab-title:nth-child(2) a').click();
+
+      // let the 'edit' panel show
+      $('#editTab').show();
+
+      // fake-click to open the tabbed 'edit' panel
+      $('#editTab a').click();
 
       // **** GRAB INFO from selected row
       var id = $(this).closest('tr').children().first().text().trim();

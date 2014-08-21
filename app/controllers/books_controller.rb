@@ -43,24 +43,23 @@ class BooksController < ApplicationController
 
   def update
     @updated_book = Book.find(params[:id])
-    @updated_book.update(book_params)
-    # handling multiple authors in the edit form
-    author_params.each do |name|
-      # try to find author that is already assoc. with book id
-      author = @updated_book.authors.find {|author| author.full_name == name}
-      # if no match, then create new author and book-author relationship
-      if author.nil?
-        author = Author.new(full_name: name)
-        author.save!
-        AuthorBook.create!( {book_id: @updated_book.id, author_id: author.id} )
+    if @updated_book.update(book_params)
+      # handling multiple authors in the edit form
+      author_params.each do |name|
+        # try to find author that is already assoc. with book id
+        author = @updated_book.authors.find {|author| author.full_name == name}
+        # if no match, then create new author and book-author relationship
+        if author.nil?
+          author = Author.new(full_name: name)
+          author.save!
+          AuthorBook.create!( {book_id: @updated_book.id, author_id: author.id} )
+        end
       end
-    end
-    # if @updated_book.update(book_params)
       redirect_to '/books'
-    # else
-    #   @books = Book.all 
-    #   render 'index'
-    # end
+    else
+      @books = Book.all 
+      render 'index'
+    end
   end
 
   def destroy

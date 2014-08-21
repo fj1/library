@@ -24,7 +24,7 @@ class DvdsController < ApplicationController
       actor_params.each do |name|
         actor = Actor.new(full_name: name)
         actor.save!
-        ActorDvd.create!( {dvd_id: new_dvddvd.id, actor_id: actor.id} )
+        ActorDvd.create!( {dvd_id: new_dvd.id, actor_id: actor.id} )
       end
       redirect_to '/dvds'
     else

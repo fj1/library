@@ -1,28 +1,13 @@
-== README
+***** DataBeast *****
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+DataBeast is a demo web application, and is one of my senior projects for MakerSquare. It is designed for a user to manage their personal library of books, CDs, DVDs, and video games. 
 
-Things you may want to cover:
+It is a basic CRUD application built with:
+• Ruby, Rails
+• JavaScript, jQuery
+• HTML, CSS, Foundation
+• DataTables, a JavaScript/jQuery plug-in: www.datatables.net
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Viewable at http://data-beast.herokuapp.com/
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.

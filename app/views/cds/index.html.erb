@@ -45,11 +45,11 @@
         <td class="loan" data-value="<%= cd.on_loan %>">
           <% if cd.on_loan == true %> 
             <p style="display:none">a</p>
-            <%= image_tag "green-check.jpg", {class: "check", value: "true"} %>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
             <!-- <img value="true" class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <%= image_tag "red-check.jpg", {class: "check", value: "false"} %>
+            <%= image_tag "red-check.png", {class: "check", value: "false"} %>
             <!-- <img value="false" class="check" src="/assets/red-check.png"/> -->
           <% end %> 
         </td>
@@ -67,11 +67,11 @@
         <td class="digital" data-value="<%= cd.is_digital %>"> 
           <% if cd.is_digital == true %> 
             <p style="display:none">a</p>
-            <%= image_tag "green-check.jpg", {class: "check", value: "true"} %>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
             <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <%= image_tag "red-check.jpg", {class: "check", value: "false"} %>
+            <%= image_tag "red-check.png", {class: "check", value: "false"} %>
             <!-- <img class="check" src="/assets/red-check.png"/> -->
           <% end %> 
         </td>
@@ -79,7 +79,7 @@
         <td class="owned" data-value="<%= cd.is_owned %>"> 
           <% if cd.is_owned == true %> 
             <p style="display:none">a</p>
-            <%= image_tag "green-check.jpg", {class: "check", value: "true"} %>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
             <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>

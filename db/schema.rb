@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140818051239) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "actor_dvds", force: true do |t|
     t.integer  "actor_id"
     t.integer  "dvd_id"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20140818051239) do
     t.datetime "updated_at"
   end
 
-  add_index "actor_dvds", ["actor_id"], name: "index_actor_dvds_on_actor_id"
-  add_index "actor_dvds", ["dvd_id"], name: "index_actor_dvds_on_dvd_id"
+  add_index "actor_dvds", ["actor_id"], name: "index_actor_dvds_on_actor_id", using: :btree
+  add_index "actor_dvds", ["dvd_id"], name: "index_actor_dvds_on_dvd_id", using: :btree
 
   create_table "actors", force: true do |t|
     t.datetime "created_at"
@@ -36,8 +39,8 @@ ActiveRecord::Schema.define(version: 20140818051239) do
     t.datetime "updated_at"
   end
 
-  add_index "author_books", ["author_id"], name: "index_author_books_on_author_id"
-  add_index "author_books", ["book_id"], name: "index_author_books_on_book_id"
+  add_index "author_books", ["author_id"], name: "index_author_books_on_author_id", using: :btree
+  add_index "author_books", ["book_id"], name: "index_author_books_on_book_id", using: :btree
 
   create_table "authors", force: true do |t|
     t.datetime "created_at"
@@ -65,8 +68,8 @@ ActiveRecord::Schema.define(version: 20140818051239) do
     t.datetime "updated_at"
   end
 
-  add_index "cd_ensembles", ["cd_id"], name: "index_cd_ensembles_on_cd_id"
-  add_index "cd_ensembles", ["ensemble_id"], name: "index_cd_ensembles_on_ensemble_id"
+  add_index "cd_ensembles", ["cd_id"], name: "index_cd_ensembles_on_cd_id", using: :btree
+  add_index "cd_ensembles", ["ensemble_id"], name: "index_cd_ensembles_on_ensemble_id", using: :btree
 
   create_table "cd_musicians", force: true do |t|
     t.integer  "cd_id"
@@ -75,8 +78,8 @@ ActiveRecord::Schema.define(version: 20140818051239) do
     t.datetime "updated_at"
   end
 
-  add_index "cd_musicians", ["cd_id"], name: "index_cd_musicians_on_cd_id"
-  add_index "cd_musicians", ["musician_id"], name: "index_cd_musicians_on_musician_id"
+  add_index "cd_musicians", ["cd_id"], name: "index_cd_musicians_on_cd_id", using: :btree
+  add_index "cd_musicians", ["musician_id"], name: "index_cd_musicians_on_musician_id", using: :btree
 
   create_table "cds", force: true do |t|
     t.string   "title"

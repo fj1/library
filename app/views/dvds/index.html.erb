@@ -30,10 +30,12 @@
         <td class="loan" data-value="<%= dvd.on_loan %>"> 
           <% if dvd.on_loan == true %> 
             <p style="display:none">a</p>
-            <img class="check" src="/assets/green-check.png"/>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
+            <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <img class="check" src="/assets/red-check.png"/>
+            <%= image_tag "red-check.png", {class: "check", value: "false"} %>
+            <!-- <img class="check" src="/assets/red-check.png"/> -->
           <% end %> 
         </td>
         <!-- viewed if/else -->  
@@ -50,20 +52,24 @@
         <td class="digital" data-value="<%= dvd.is_digital %>"> 
           <% if dvd.is_digital == true %> 
             <p style="display:none">a</p>
-            <img class="check" src="/assets/green-check.png"/>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
+            <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <img class="check" src="/assets/red-check.png"/>
+            <%= image_tag "red-check.png", {class: "check", value: "false"} %>
+            <!-- <img class="check" src="/assets/red-check.png"/> -->
           <% end %> 
         </td>
         <!-- is_owned if/else -->
         <td class="owned" data-value="<%= dvd.is_owned %>"> 
           <% if dvd.is_owned == true %> 
             <p style="display:none">a</p>
-            <img class="check" src="/assets/green-check.png"/>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
+            <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <img class="check gift" src="/assets/gift.png"/>
+            <%= image_tag "gift.png", {class: "check gift", value: "false"} %>
+            <!-- <img class="check gift" src="/assets/gift.png"/> -->
           <% end %> 
         </td>
         <!-- edit button -->

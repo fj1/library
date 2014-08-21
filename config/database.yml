@@ -34,7 +34,15 @@ development:
   pool: 5
 
 production:
-  url: <%= ENV['DATABASE_URL'] %>
+ url: <%= ENV['DATABASE_URL'] %>
+
+# For testing staging environment-- "local production"
+
+# production:
+#   adapter: postgresql
+#   encoding: utf8
+#   database: library_staging
+#   pool: 5
 
 
 

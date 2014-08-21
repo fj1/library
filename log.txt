@@ -1,3 +1,6 @@
+ vars by jurek.frances@gmail.com
+014-08-21T01:55:59.489786+00:00 app[web.1]:   bin/rails:4:in `require'
+2
 2014-08-21T00:07:00.520213+00:00 heroku[api]: Enable Logplex by jurek.frances@gmail.com
 2014-08-21T00:07:00.520270+00:00 heroku[api]: Release v2 created by jurek.frances@gmail.com
 2014-08-21T00:32:09+00:00 heroku[slug-compiler]: Slug compilation started
@@ -17,7 +20,7 @@
 2014-08-21T01:45:03.696215+00:00 heroku[api]: Attach HEROKU_POSTGRESQL_COPPER resource by jurek.frances@gmail.com
 2014-08-21T01:45:03.696301+00:00 heroku[api]: Release v4 created by jurek.frances@gmail.com
 2014-08-21T01:45:04+00:00 heroku[slug-compiler]: Slug compilation finished
-2014-08-21T01:45:04.042133+00:00 heroku[api]: Set LANG, RAILS_ENV, RACK_ENV, SECRET_KEY_BASE config vars by jurek.frances@gmail.com
+2014-08-21T01:45:04.042133+00:00 heroku[api]: Set LANG, RAILS_ENV, RACK_ENV, SECRET_KEY_BASE config
 2014-08-21T01:45:04.042465+00:00 heroku[api]: Release v5 created by jurek.frances@gmail.com
 2014-08-21T01:45:04.158999+00:00 heroku[api]: Deploy c6fbda3 by jurek.frances@gmail.com
 2014-08-21T01:45:04.159223+00:00 heroku[api]: Release v6 created by jurek.frances@gmail.com
@@ -49,3 +52,52 @@
 2014-08-21T01:47:39.453789+00:00 heroku[run.3593]: Starting process with command `bundle exec rake db:seed`
 2014-08-21T01:47:46.732612+00:00 heroku[run.3593]: Process exited with status 0
 2014-08-21T01:47:46.741983+00:00 heroku[run.3593]: State changed from up to complete
+2014-08-21T01:50:52.790363+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=3647d8f4-6fce-4fa1-8988-81f9765a7ed4 fwd="70.114.206.78" dyno=web.1 connect=2ms service=8ms status=404 bytes=600
+2014-08-21T01:51:03.472478+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=c2f6f23c-506c-49b6-90f4-d79e455be189 fwd="70.114.206.78" dyno=web.1 connect=19ms service=31ms status=404 bytes=555
+2014-08-21T01:51:42.922393+00:00 heroku[api]: Starting process with command `bundle exec rake assets:precompile` by jurek.frances@gmail.com
+2014-08-21T01:51:46.517966+00:00 heroku[run.1101]: Awaiting client
+2014-08-21T01:51:46.561715+00:00 heroku[run.1101]: Starting process with command `bundle exec rake assets:precompile`
+2014-08-21T01:51:46.613484+00:00 heroku[run.1101]: State changed from starting to up
+2014-08-21T01:51:50.817256+00:00 heroku[run.1101]: Process exited with status 0
+2014-08-21T01:55:44+00:00 heroku[slug-compiler]: Slug compilation started
+2014-08-21T01:55:55+00:00 heroku[slug-compiler]: Slug compilation finished
+2014-08-21T01:55:55.283628+00:00 heroku[api]: Deploy e371104 by jurek.frances@gmail.com
+2014-08-21T01:55:55.283785+00:00 heroku[api]: Release v7 created by jurek.frances@gmail.com
+2014-08-21T01:55:55.957400+00:00 heroku[web.1]: State changed from up to starting
+2014-08-21T01:55:58.804327+00:00 heroku[web.1]: Stopping all processes with SIGTERM
+2014-08-21T01:55:58.925521+00:00 heroku[web.1]: Starting process with command `bin/rails server -p 55890 -e production`
+2014-08-21T01:55:59.489729+00:00 app[web.1]: [2014-08-21 01:55:59] FATAL SignalException: SIGTERM
+2014-08-21T01:55:59.489759+00:00 app[web.1]:  /app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `select'
+2014-08-21T01:55:59.489761+00:00 app[web.1]:  /app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:170:in `block in start'
+2014-08-21T01:55:59.489763+00:00 app[web.1]:  /app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:32:in `start'
+2014-08-21T01:55:59.489765+00:00 app[web.1]:  /app/vendor/ruby-2.0.0/lib/ruby/2.0.0/webrick/server.rb:160:in `start'
+2014-08-21T01:55:59.489766+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/handler/webrick.rb:14:in `run'
+2014-08-21T01:55:59.489768+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/rack-1.5.2/lib/rack/server.rb:264:in `start'
+2014-08-21T01:55:59.489769+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/server.rb:69:in `start'
+2014-08-21T01:55:59.489771+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:81:in `block in server'
+2014-08-21T01:55:59.489772+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `tap'
+2014-08-21T01:55:59.489781+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:76:in `server'
+2014-08-21T01:55:59.489783+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands/commands_tasks.rb:40:in `run_command!'
+2014-08-21T01:55:59.489784+00:00 app[web.1]:  /app/vendor/bundle/ruby/2.0.0/gems/railties-4.1.0/lib/rails/commands.rb:17:in `<top (required)>'
+2014-08-21T01:55:59.489788+00:00 app[web.1]:  bin/rails:4:in `<main>'
+2014-08-21T01:55:59.489794+00:00 app[web.1]: [2014-08-21 01:55:59] INFO  going to shutdown ...
+2014-08-21T01:55:59.489818+00:00 app[web.1]: [2014-08-21 01:55:59] INFO  WEBrick::HTTPServer#start done.
+2014-08-21T01:55:59.489906+00:00 app[web.1]: Exiting
+2014-08-21T01:56:00.231178+00:00 heroku[web.1]: Process exited with status 143
+2014-08-21T01:56:00.943979+00:00 app[web.1]: => Booting WEBrick
+2014-08-21T01:56:00.944006+00:00 app[web.1]: => Rails 4.1.0 application starting in production on http://0.0.0.0:55890
+2014-08-21T01:56:00.944008+00:00 app[web.1]: => Run `rails server -h` for more startup options
+2014-08-21T01:56:00.944010+00:00 app[web.1]: => Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+2014-08-21T01:56:00.944011+00:00 app[web.1]: => Ctrl-C to shutdown server
+2014-08-21T01:56:02.181714+00:00 app[web.1]: [2014-08-21 01:56:02] INFO  WEBrick 1.3.1
+2014-08-21T01:56:02.181763+00:00 app[web.1]: [2014-08-21 01:56:02] INFO  ruby 2.0.0 (2014-05-08) [x86_64-linux]
+2014-08-21T01:56:02.182140+00:00 app[web.1]: [2014-08-21 01:56:02] INFO  WEBrick::HTTPServer#start: pid=2 port=55890
+2014-08-21T01:56:02.610846+00:00 heroku[web.1]: State changed from starting to up
+2014-08-21T01:56:03.695799+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=d3da9e60-3139-43d7-8ae0-df502b5de7eb fwd="54.198.139.243" dyno=web.1 connect=1ms service=179ms status=404 bytes=398
+2014-08-21T01:56:04.162762+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=9f6be792-acd9-494f-982e-6118fbfb30fb fwd="70.114.206.78" dyno=web.1 connect=0ms service=8ms status=404 bytes=576
+2014-08-21T01:56:10.344746+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=00e626c0-4d07-419f-9ab3-c7de88efc207 fwd="70.114.206.78" dyno=web.1 connect=0ms service=6ms status=404 bytes=599
+2014-08-21T01:56:14.014697+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=aa5f8ef9-6de2-403e-aeb2-7e11ad1134ec fwd="70.114.206.78" dyno=web.1 connect=0ms service=10ms status=404 bytes=599
+2014-08-21T01:56:38.172624+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=3a0021cf-9d84-427f-b53b-c299cd046f9f fwd="70.114.206.78" dyno=web.1 connect=0ms service=12ms status=404 bytes=599
+2014-08-21T01:56:38.392397+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=6610f3ee-2a1a-46f0-bdec-e87da9b68a57 fwd="70.114.206.78" dyno=web.1 connect=0ms service=11ms status=404 bytes=599
+2014-08-21T01:56:38.573700+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=9545683b-b49d-4407-9f2f-f3cdaa563781 fwd="70.114.206.78" dyno=web.1 connect=1ms service=10ms status=404 bytes=599
+2014-08-21T01:56:38.714413+00:00 heroku[router]: at=info method=GET path="/" host=data-beast.herokuapp.com request_id=182521d9-afdd-4923-b7ea-4e39f0afeaff fwd="70.114.206.78" dyno=web.1 connect=1ms service=13ms status=404 bytes=599

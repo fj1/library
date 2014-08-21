@@ -31,10 +31,11 @@
           <% if book.on_loan == true %> 
             <!-- display:none to allow for 'sorting' the icons -->
             <p style="display:none">a</p>
-            <%= image_tag("green-check.png", class: "check") %>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
           <% else %> 
             <p style="display:none">b</p>
-            <img class="check" src="/assets/red-check.png"/>
+            <%= image_tag "red-check.png", {class: "check", value: "false"} %>
+            <!-- <img class="check" src="/assets/red-check.png"/> -->
           <% end %> 
         </td>
         <!-- read if/else -->  
@@ -51,20 +52,24 @@
         <td class="digital" data-value="<%= book.is_digital %>"> 
           <% if book.is_digital == true %> 
             <p style="display:none">a</p>
-            <img class="check" src="/assets/green-check.png"/>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
+            <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <img class="check" src="/assets/red-check.png"/>
+            <%= image_tag "red-check.png", {class: "check", value: "false"} %>
+            <!-- <img class="check" src="/assets/red-check.png"/> -->
           <% end %> 
         </td>
         <!-- is_owned if/else -->
         <td class="owned" data-value="<%= book.is_owned %>"> 
           <% if book.is_owned == true %> 
             <p style="display:none">a</p>
-            <img class="check" src="/assets/green-check.png"/>
+            <%= image_tag "green-check.png", {class: "check", value: "true"} %>
+            <!-- <img class="check" src="/assets/green-check.png"/> -->
           <% else %> 
             <p style="display:none">b</p>
-            <img class="check gift" src="/assets/gift.png"/>
+            <%= image_tag "gift.png", {class: "check", value: "false"} %>
+            <!-- <img class="check gift" src="/assets/gift.png"/> -->
           <% end %> 
         </td>
         <td class="editColumn">
